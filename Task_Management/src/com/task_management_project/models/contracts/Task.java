@@ -1,5 +1,7 @@
 package com.task_management_project.models.contracts;
 
+import com.task_management_project.models.MemberImpl;
+
 import java.util.List;
 
 public interface Task {
@@ -8,4 +10,5 @@ public interface Task {
     String getDescription();
     List<String> getCommentList();
     List<String> getChangesList();
+
 }
