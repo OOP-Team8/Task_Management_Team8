@@ -14,8 +14,10 @@ public class BoardImpl implements Board {
     private List<Task> boardTasks;
     private List<EventLog> eventLogList;
 
-    public BoardImpl() {
-
+    public BoardImpl(String name, List<Task> boardTasks,List<EventLog> eventLogList) {
+        this.name = name;
+        this.boardTasks = boardTasks;
+        this.eventLogList = eventLogList;
     }
 
     public String getName() {

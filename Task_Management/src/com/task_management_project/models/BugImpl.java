@@ -7,8 +7,11 @@ import com.task_management_project.models.enums.Priority;
 
 public class BugImpl extends TaskImpl implements Bug {
 
+    private BugSeverity bugSeverity;
+
     public BugImpl(int id, String title, String description) {
         super(id, title, description);
+
     }
 
     public Priority getPriority() {
@@ -16,7 +19,7 @@ public class BugImpl extends TaskImpl implements Bug {
     }
 
     public BugSeverity getSeverity() {
-        return null;
+        return bugSeverity;
     }
 
     public BugStatus getStatus() {

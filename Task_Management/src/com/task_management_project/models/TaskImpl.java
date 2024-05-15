@@ -9,7 +9,7 @@ import com.task_management_project.utils.Validation;
 import java.util.ArrayList;
 import java.util.List;
 
-public class TaskImpl implements Task {
+public abstract class TaskImpl implements Task {
     private int id = 0;
     private String title;
     private String description;
