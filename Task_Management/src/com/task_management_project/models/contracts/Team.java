@@ -9,7 +9,11 @@ public interface Team {
 
     String getName();
 
-    List<PersonImpl> getMembers();
+    List<Person> getMembers();
 
-    List<BoardImpl>  getBoards();
+    List<Board> getBoards();
+
+    void addMember(Person person);
+
+    void addBoard(Board board);
 }

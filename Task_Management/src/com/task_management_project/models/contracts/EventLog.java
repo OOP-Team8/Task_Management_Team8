@@ -4,5 +4,5 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 public interface EventLog {
-    LocalDateTime getLocalDateTime();
+    String viewInfo();
 }

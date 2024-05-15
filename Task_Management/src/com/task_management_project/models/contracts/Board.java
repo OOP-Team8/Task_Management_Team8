@@ -7,5 +7,5 @@ import java.util.List;
 public interface Board {
 
     String getName();
-    List<TaskImpl> getTasks();
+    List<Task> getTasks();
 }

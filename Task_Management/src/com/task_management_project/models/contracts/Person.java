@@ -8,7 +8,6 @@ public interface Person {
 
     String getName();
     List<Task> getTasks();
-
     List<EventLog> getEventLog();
 
 }
