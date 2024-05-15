@@ -3,7 +3,7 @@ package com.task_management_project.models;
 import com.task_management_project.models.contracts.Comment;
 import com.task_management_project.models.contracts.EventLog;
 import com.task_management_project.models.contracts.Task;
-import com.task_management_project.utils.DataValidation;
+import com.task_management_project.utils.contracts.DataValidation;
 import com.task_management_project.utils.Validation;
 
 import java.util.ArrayList;

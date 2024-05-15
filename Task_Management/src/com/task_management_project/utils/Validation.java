@@ -1,6 +1,8 @@
 package com.task_management_project.utils;
 
-public class Validation implements DataValidation{
+import com.task_management_project.utils.contracts.DataValidation;
+
+public class Validation implements DataValidation {
     public Validation() {
     }
 

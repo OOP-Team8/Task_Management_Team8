@@ -1,4 +1,4 @@
-package com.task_management_project.utils;
+package com.task_management_project.utils.contracts;
 
 public interface DataValidation {
     int MIN_TITLE_LENGTH = 10;
