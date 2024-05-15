@@ -12,6 +12,19 @@ public class ShowPersonActivity extends BaseCommand{
 
     @Override
     protected String executeCommand(List<String> parameters) {
+//        if (parameters.size() != 1) {
+//            return "Invalid number of parameters. Usage: showPersonActivity <personName>";
+//        }
+//
+//        String personName = parameters.get(0);
+//
+//        Person person = taskManagementRepository.getPersonByName(personName);
+//
+//        if (person == null) {
+//            return "Person not found.";
+//        }
+//
+//        return person.getActivity();
         return null;
     }
 }

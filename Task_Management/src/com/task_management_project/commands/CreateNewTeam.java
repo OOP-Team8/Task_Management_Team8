@@ -11,6 +11,19 @@ public class CreateNewTeam extends BaseCommand {
 
     @Override
     protected String executeCommand(List<String> parameters) {
+//        if (parameters.size() < 1) {
+//            return "Insufficient parameters. Please provide a name for the team.";
+//        }
+//
+//        String teamName = parameters.get(0);
+//
+//        if (taskManagementRepository.teamExists(teamName)) {
+//            return "Team with the provided name already exists.";
+//        }
+//
+//        taskManagementRepository.createTeam(teamName);
+//
+//        return String.format("Team '%s' successfully created.", teamName);
         return null;
     }
 }

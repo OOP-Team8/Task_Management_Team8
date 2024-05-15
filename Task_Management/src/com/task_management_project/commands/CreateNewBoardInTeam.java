@@ -11,6 +11,26 @@ public class CreateNewBoardInTeam extends BaseCommand{
 
     @Override
     protected String executeCommand(List<String> parameters) {
+//        if (parameters.size() < 2) {
+//            return "Insufficient parameters. Please provide the team name and the board name.";
+//        }
+//
+//        String teamName = parameters.get(0);
+//        String boardName = parameters.get(1);
+//
+//        if (!taskManagementRepository.teamExists(teamName)) {
+//            return "Team with the provided name does not exist.";
+//        }
+//
+//        Team team = taskManagementRepository.getTeamByName(teamName);
+//        if (team.boardExists(boardName)) {
+//            return "Board with the provided name already exists in the team.";
+//        }
+//
+//        Board newBoard = new Board(boardName);
+//        team.addBoard(newBoard);
+//
+//        return String.format("Board '%s' successfully created in team '%s'.", boardName, teamName);
         return null;
     }
 }

@@ -17,4 +17,6 @@ public interface TaskManagementRepository {
     Bug createBug(int id, String title, String description);
 
     Board createBoard(String name, List<Task> boardTasks,List<EventLog> eventLogList);
+
+    List<EventLog> getTeamActivity();
 }

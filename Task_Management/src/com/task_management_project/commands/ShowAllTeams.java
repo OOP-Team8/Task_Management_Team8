@@ -11,6 +11,20 @@ public class ShowAllTeams extends BaseCommand{
 
     @Override
     protected String executeCommand(List<String> parameters) {
+//        List<Team> teams = taskManagementRepository.getAllTeams();
+//
+//        if (teams.isEmpty()) {
+//            return "No teams found.";
+//        }
+//
+//        StringBuilder result = new StringBuilder();
+//        result.append("Teams:\n");
+//        for (Team team : teams) {
+//            result.append(team.getName()).append("\n");
+//        }
+//
+//        return result.toString();
+//    }
         return null;
     }
 }
