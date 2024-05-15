@@ -9,8 +9,8 @@ public class TaskManagementRepositoryImpl  implements TaskManagementRepository {
 
 
     @Override
-    public void addPerson(Person personToAdd) {
-
+    public Person addPerson(Person personToAdd) {
+        return null;
     }
 
     @Override

@@ -6,7 +6,7 @@ import java.util.List;
 
 public interface TaskManagementRepository {
 
-    void addPerson(Person personToAdd);
+    Person addPerson(Person personToAdd);
 
     Person findPersonByName(String name);
 

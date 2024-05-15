@@ -1,4 +1,16 @@
 package com.task_management_project.commands;
 
-public class CreateNewPerson {
+import com.task_management_project.core.contracts.TaskManagementRepository;
+
+import java.util.List;
+
+public class CreateNewPerson extends  BaseCommand{
+    public CreateNewPerson(TaskManagementRepository taskManagementRepository) {
+        super(taskManagementRepository);
+    }
+
+    @Override
+    protected String executeCommand(List<String> parameters) {
+        return null;
+    }
 }
