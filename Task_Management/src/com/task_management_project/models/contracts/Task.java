@@ -3,7 +3,8 @@ package com.task_management_project.models.contracts;
 
 import java.util.List;
 
-public interface Task {
+public interface Task extends Printable,Identifiable{
+
     int getId();
     String getTitle();
     String getDescription();
