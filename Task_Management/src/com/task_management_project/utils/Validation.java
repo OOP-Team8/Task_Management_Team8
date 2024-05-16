@@ -1,8 +1,6 @@
 package com.task_management_project.utils;
 
-import com.task_management_project.models.contracts.Names;
-import com.task_management_project.models.contracts.Person;
-import com.task_management_project.models.contracts.Team;
+import com.task_management_project.models.contracts.Nameable;
 import com.task_management_project.utils.contracts.DataValidation;
 
 import java.util.List;
@@ -27,7 +25,7 @@ public class Validation implements DataValidation {
             throw new IllegalArgumentException(String.format(INVALID_NUMBER_OF_ARGUMENTS, expectedArgumentsCount, list.size()));
         }
     }
-    public static <T extends Names> void validateDubs(List<T> list, String name){
+    public static <T extends Nameable> void validateDubs(List<T> list, String name){
 
         for (T item : list) {
             if (item.getName().equals(name)){

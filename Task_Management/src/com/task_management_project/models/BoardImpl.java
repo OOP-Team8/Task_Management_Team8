@@ -2,7 +2,6 @@ package com.task_management_project.models;
 
 import com.task_management_project.models.contracts.Board;
 import com.task_management_project.models.contracts.EventLog;
-import com.task_management_project.models.contracts.Person;
 import com.task_management_project.models.contracts.Task;
 import com.task_management_project.utils.Validation;
 import com.task_management_project.utils.contracts.DataValidation;
@@ -29,7 +28,13 @@ public class BoardImpl implements Board {
         this.name = name;
     }
 
+    @Override
     public List<Task> getTasks() {
         return new ArrayList<>(boardTasks);
+    }
+
+    @Override
+    public List<EventLog> getLogs() {
+        return new ArrayList<>(eventLogList);
     }
 }

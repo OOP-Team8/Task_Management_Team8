@@ -1,5 +1,5 @@
 package com.task_management_project.models.contracts;
 
-public interface Names {
+public interface Nameable {
     String getName();
 }

@@ -15,6 +15,6 @@ public class ListingHelpers{
         }
 
         return String.join(CommandsConstants.JOIN_DELIMITER + System.lineSeparator(), result).trim();
-    }
 
+    }
 }

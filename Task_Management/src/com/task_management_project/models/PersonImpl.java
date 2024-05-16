@@ -53,7 +53,7 @@ public class PersonImpl implements Person {
         return new ArrayList<>(tasks);
     }
     @Override
-    public List<EventLog> getEventLog() {
+    public List<EventLog> getLogs() {
         return new ArrayList<>(history);
     }
 

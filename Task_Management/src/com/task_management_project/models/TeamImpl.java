@@ -45,5 +45,10 @@ public class TeamImpl implements Team {
     }
 
     public void addBoard(Board board) {
+        if (!this.boards.isEmpty() && this.boards.contains(board)) {
+            throw new IllegalArgumentException();
+        } else {
+            this.boards.add(board);
+        }
     }
 }
