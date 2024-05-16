@@ -12,14 +12,13 @@ import java.util.List;
 public class PersonImpl implements Person {
 
     private String name;
-    private List<Task> tasks;
-    private List<EventLog> history;
-    private List<String> names = new ArrayList();
+    private List<Task> tasks = new ArrayList<>();
+    private List<EventLog> history = new ArrayList<>();
+    private static List<String> names = new ArrayList<>();
 
-    public PersonImpl(String name, List<Task> tasks, List<Story> history) {
-        this.setName(name);
-        new ArrayList();
-        new ArrayList();
+    public PersonImpl(String name) {
+        setName(name);
+        history.add(new EventLogImpl(String.format("New employee was appointed - %s",this.name)));
     }
 
     public String getName() {
@@ -27,20 +26,38 @@ public class PersonImpl implements Person {
     }
 
     private void setName(String name) {
-        if (!this.names.isEmpty() && this.names.contains(name)) {
-            throw new IllegalArgumentException();
-        } else {
+        try {
+//            if (names.isEmpty() || !names.contains(name)) {
+//                Validation.validateStringLength(name, 5, 15, DataValidation.NAME_ERROR);
+//                names.add(name);
+//                this.name = name;
+//            }
+//            else {
+//                throw new IllegalArgumentException("It was used!");
+//            }
+//            for (String nameItem : names) {
+//                if (nameItem.equals(name)){
+//                    throw new IllegalArgumentException(String.format("The name %s was used!",name));
+//                }
+//            }
             Validation.validateStringLength(name, 5, 15, DataValidation.NAME_ERROR);
-            this.names.add(name);
+            names.add(name);
             this.name = name;
         }
+        catch (IllegalArgumentException ex){
+            System.out.println(ex.getMessage());
+        }
     }
-
+    @Override
     public List<Task> getTasks() {
-        return new ArrayList(this.tasks);
+        return new ArrayList<>(tasks);
+    }
+    @Override
+    public List<EventLog> getEventLog() {
+        return new ArrayList<>(history);
     }
 
-    public List<EventLog> getEventLog() {
-        return new ArrayList(this.history);
+    public static List<String> getNames() {
+        return new ArrayList<>(names);
     }
 }

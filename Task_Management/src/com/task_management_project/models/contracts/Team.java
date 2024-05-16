@@ -5,10 +5,7 @@ import com.task_management_project.models.PersonImpl;
 
 import java.util.List;
 
-public interface Team {
-
-    String getName();
-
+public interface Team extends Names{
     List<Person> getMembers();
 
     List<Board> getBoards();

@@ -32,7 +32,9 @@ public abstract class TaskImpl implements Task {
 
     private void setTitle(String title) {
         Validation.validateStringLength(title, 10, 100, DataValidation.TITLE_ERROR);
-        this.eventList.add(new EventLogImpl(String.format("The title was changed - %s", title)));
+        if (this.title != null){
+            this.eventList.add(new EventLogImpl(String.format("The title was changed - %s", title)));
+        }
         this.title = title;
     }
 
@@ -42,7 +44,9 @@ public abstract class TaskImpl implements Task {
 
     private void setDescription(String description) {
         Validation.validateStringLength(description, 10, 500, DataValidation.DESCRIPTION_ERROR);
-        this.eventList.add(new EventLogImpl(String.format("The description was changed - %s", description)));
+        if (this.description != null){
+            this.eventList.add(new EventLogImpl(String.format("The description was changed - %s", description)));
+        }
         this.description = description;
     }
 

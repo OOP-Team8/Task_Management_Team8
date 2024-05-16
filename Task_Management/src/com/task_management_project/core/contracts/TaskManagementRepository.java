@@ -6,15 +6,21 @@ import java.util.List;
 
 public interface TaskManagementRepository {
 
-    Person addPerson(Person personToAdd);
+    void addPerson(Person personToAdd);
+    List<Person> getPeople();
+    List<Task> getTasks();
+    List<Board> getBoards();
+    List<Team> getTeams();
 
     Person findPersonByName(String name);
 
-    Person createPerson(String name, List<Task> tasks, List<Story> history);
+    Person createPerson(String name);
+    Task findTaskById(int id);
 
     Team createTeam(String name);
+    Team findTeamByName(String name);
 
     Bug createBug(int id, String title, String description);
 
-    Board createBoard(String name, List<Task> boardTasks,List<EventLog> eventLogList);
+    Board createBoard(String name);
 }

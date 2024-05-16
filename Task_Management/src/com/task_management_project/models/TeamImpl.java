@@ -18,6 +18,7 @@ public class TeamImpl implements Team {
         this.setName(name);
     }
 
+    @Override
     public String getName() {
         return this.name;
     }
