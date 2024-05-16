@@ -6,7 +6,7 @@ import com.task_management_project.models.enums.Priority;
 
 import java.io.ObjectInputFilter;
 
-public interface Bug extends Task{
+public interface Bug extends Task,Identifiable{
 
     Priority getPriority();
 

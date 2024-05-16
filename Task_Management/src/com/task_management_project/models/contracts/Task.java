@@ -5,7 +5,6 @@ import java.util.List;
 
 public interface Task extends Printable,Identifiable{
 
-    int getId();
     String getTitle();
     String getDescription();
     List<Comment> getCommentList();
