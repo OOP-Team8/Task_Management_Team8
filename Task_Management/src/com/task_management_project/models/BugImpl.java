@@ -25,4 +25,9 @@ public class BugImpl extends TaskImpl implements Bug {
     public BugStatus getStatus() {
         return null;
     }
+
+    @Override
+    public String getAsString() {
+        return null;
+    }
 }

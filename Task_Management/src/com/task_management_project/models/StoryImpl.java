@@ -6,4 +6,9 @@ public class StoryImpl extends TaskImpl implements Story {
     public StoryImpl(int id, String title, String description) {
         super(id, title, description);
     }
+
+    @Override
+    public String getAsString() {
+        return null;
+    }
 }
