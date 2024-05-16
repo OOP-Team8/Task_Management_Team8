@@ -1,12 +1,13 @@
-package com.task_management_project.commands;
+package com.task_management_project.commands.show;
 
+import com.task_management_project.commands.BaseCommand;
 import com.task_management_project.core.contracts.TaskManagementRepository;
 import com.task_management_project.models.contracts.Person;
 import com.task_management_project.utils.Validation;
 
 import java.util.List;
 
-public class ShowAllPeople extends BaseCommand{
+public class ShowAllPeople extends BaseCommand {
     public final int EXPECTED_PARAMS = 0;
 
     public ShowAllPeople(TaskManagementRepository taskManagementRepository) {

@@ -1,12 +1,13 @@
-package com.task_management_project.commands;
+package com.task_management_project.commands.create;
 
+import com.task_management_project.commands.BaseCommand;
 import com.task_management_project.core.contracts.TaskManagementRepository;
 import com.task_management_project.models.contracts.Board;
 import com.task_management_project.utils.Validation;
 
 import java.util.List;
 
-public class CreateNewBoardInTeam extends BaseCommand{
+public class CreateNewBoardInTeam extends BaseCommand {
     public final int EXPECTED_PARAMS = 1;
     public CreateNewBoardInTeam(TaskManagementRepository taskManagementRepository) {
         super(taskManagementRepository);

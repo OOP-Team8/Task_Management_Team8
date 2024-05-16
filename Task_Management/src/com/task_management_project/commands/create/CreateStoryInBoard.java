@@ -1,12 +1,12 @@
-package com.task_management_project.commands;
+package com.task_management_project.commands.create;
 
+import com.task_management_project.commands.BaseCommand;
 import com.task_management_project.core.contracts.TaskManagementRepository;
 
 import java.util.List;
 
-public class ShowPersonActivity extends BaseCommand{
-
-    public ShowPersonActivity(TaskManagementRepository taskManagementRepository) {
+public class CreateStoryInBoard extends BaseCommand {
+    public CreateStoryInBoard(TaskManagementRepository taskManagementRepository) {
         super(taskManagementRepository);
     }
 

@@ -1,22 +1,23 @@
-package com.task_management_project.commands;
+package com.task_management_project.commands.create;
 
+import com.task_management_project.commands.BaseCommand;
 import com.task_management_project.core.contracts.TaskManagementRepository;
+import com.task_management_project.models.PersonImpl;
 import com.task_management_project.models.contracts.Person;
 import com.task_management_project.utils.Validation;
 
 import java.util.List;
 
-public class AddPersonToTeam extends BaseCommand {
+public class CreateNewPerson extends BaseCommand {
     public final int EXPECTED_PARAMS = 1;
-    public AddPersonToTeam(TaskManagementRepository taskManagementRepository) {
+    public CreateNewPerson(TaskManagementRepository taskManagementRepository) {
         super(taskManagementRepository);
     }
 
     @Override
     protected String executeCommand(List<String> parameters) {
         Validation.validateArgumentsCount(parameters,EXPECTED_PARAMS);
-        Person person = getTaskManagementRepository().findPersonByName(parameters.get(0));
-        getTaskManagementRepository().addPerson(person);
-        return String.format("%s was added to the team", person.getName());
+        Person person = getTaskManagementRepository().createPerson(parameters.get(0));
+        return person.getName();
     }
 }

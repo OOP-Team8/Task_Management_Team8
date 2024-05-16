@@ -1,11 +1,13 @@
-package com.task_management_project.commands;
+package com.task_management_project.commands.listing;
 
+import com.task_management_project.commands.BaseCommand;
 import com.task_management_project.core.contracts.TaskManagementRepository;
 
 import java.util.List;
 
-public class ShowBoardActivity extends BaseCommand{
-    public ShowBoardActivity(TaskManagementRepository taskManagementRepository) {
+public class ListAllBugs extends BaseCommand {
+
+    public ListAllBugs(TaskManagementRepository taskManagementRepository) {
         super(taskManagementRepository);
     }
 

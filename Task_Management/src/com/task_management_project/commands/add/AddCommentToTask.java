@@ -1,11 +1,13 @@
-package com.task_management_project.commands;
+package com.task_management_project.commands.add;
 
+import com.task_management_project.commands.BaseCommand;
 import com.task_management_project.core.contracts.TaskManagementRepository;
 
 import java.util.List;
 
-public class ShowTeamActivity extends BaseCommand{
-    public ShowTeamActivity(TaskManagementRepository taskManagementRepository) {
+public class AddCommentToTask extends BaseCommand {
+
+    public AddCommentToTask(TaskManagementRepository taskManagementRepository) {
         super(taskManagementRepository);
     }
 

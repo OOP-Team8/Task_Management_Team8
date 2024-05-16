@@ -1,11 +1,12 @@
-package com.task_management_project.commands;
+package com.task_management_project.commands.show;
 
+import com.task_management_project.commands.BaseCommand;
 import com.task_management_project.core.contracts.TaskManagementRepository;
 
 import java.util.List;
 
-public class ShowAllTeamMembers extends BaseCommand{
-    public ShowAllTeamMembers(TaskManagementRepository taskManagementRepository) {
+public class ShowBoardActivity extends BaseCommand {
+    public ShowBoardActivity(TaskManagementRepository taskManagementRepository) {
         super(taskManagementRepository);
     }
 
