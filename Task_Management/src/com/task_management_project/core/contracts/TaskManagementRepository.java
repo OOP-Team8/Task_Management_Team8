@@ -3,6 +3,7 @@ package com.task_management_project.core.contracts;
 import com.task_management_project.models.contracts.*;
 import com.task_management_project.models.enums.*;
 
+import java.lang.reflect.Member;
 import java.util.List;
 
 public interface TaskManagementRepository {
@@ -35,4 +36,10 @@ public interface TaskManagementRepository {
 
     Board createBoard(String name);
     Feedback createFeedback(String title, String description, FeedbackStatus status, int rating);
+
+    Board findBoardByName(String name);
+
+    void addTaskToBoard(Task task, Board board);
+
+    void addTaskToMember(Task task, Person member);
 }

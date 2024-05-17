@@ -37,4 +37,10 @@ public class BoardImpl implements Board {
     public List<EventLog> getLogs() {
         return new ArrayList<>(eventLogList);
     }
+
+    @Override
+    public  void addTask(Task task){
+        boardTasks.add(task);
+    }
+
 }

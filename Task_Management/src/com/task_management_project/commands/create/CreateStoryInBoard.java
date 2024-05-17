@@ -2,6 +2,7 @@ package com.task_management_project.commands.create;
 
 import com.task_management_project.commands.BaseCommand;
 import com.task_management_project.core.contracts.TaskManagementRepository;
+import com.task_management_project.models.contracts.Board;
 import com.task_management_project.models.contracts.Bug;
 import com.task_management_project.models.contracts.Person;
 import com.task_management_project.models.contracts.Story;
@@ -13,8 +14,8 @@ import java.util.List;
 
 public class CreateStoryInBoard extends BaseCommand {
 
-    private final static String STORY_ADDED_SUCCESSFULLY = "%s added story successfully!";
-    private final int EXPECTED_PARAMS = 6;
+    private final static String STORY_ADDED_SUCCESSFULLY = "Story %s added to board %s successfully!";
+    private final int EXPECTED_PARAMS = 7;
 
     public CreateStoryInBoard(TaskManagementRepository taskManagementRepository) {
         super(taskManagementRepository);
@@ -30,17 +31,18 @@ public class CreateStoryInBoard extends BaseCommand {
         Priority priority = ParsingHelpers.tryParseEnum(parameters.get(3),Priority.class);
         Size size = ParsingHelpers.tryParseEnum(parameters.get(4),Size.class);
         Person person = getTaskManagementRepository().findPersonByName(parameters.get(5));
+        String boardName = parameters.get(6);
 
 
-        return createStory(title, description,priority, storyStatus, size,person);
+        return createStory(title, description,priority, storyStatus, size,person,boardName);
     }
 
-
-    private String createStory( String title, String description,Priority priority, StoryStatus storyStatus, Size size,Person person){
+    private String createStory( String title, String description,Priority priority, StoryStatus storyStatus, Size size,Person person,String boardName){
         Story story = getTaskManagementRepository().createStory(title,description,priority,storyStatus,size,person);
+        Board board = getTaskManagementRepository().findBoardByName(boardName);
+        getTaskManagementRepository().addTaskToBoard(story,board);
+        getTaskManagementRepository().addTaskToMember(story, person);
 
-        getTaskManagementRepository().getStories().add(story);
-
-        return String.format(STORY_ADDED_SUCCESSFULLY, getTaskManagementRepository().findStoryByTitle(title));
+        return String.format(STORY_ADDED_SUCCESSFULLY,title,boardName);
     }
 }

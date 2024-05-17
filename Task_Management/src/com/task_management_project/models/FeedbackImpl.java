@@ -24,6 +24,10 @@ public class FeedbackImpl extends TaskImpl implements Feedback {
     public int getRating() {
         return this.rating;
     }
+    @Override
+    public FeedbackStatus getStatus() {
+        return this.status;
+    }
 
     private void setRating(int rating) {
         Validation.validateIntPositiveValue(rating, "The value should be positive");
@@ -33,9 +37,6 @@ public class FeedbackImpl extends TaskImpl implements Feedback {
         this.rating = rating;
     }
 
-    public FeedbackStatus getStatus() {
-        return this.status;
-    }
 
     //TODO
     @Override

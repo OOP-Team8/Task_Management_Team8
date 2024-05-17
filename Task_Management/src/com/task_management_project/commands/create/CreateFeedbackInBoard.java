@@ -18,8 +18,8 @@ import java.util.List;
 public class CreateFeedbackInBoard extends BaseCommand {
     private static final String INVALID_RATING = "Invalid rating";
 
-    private final static String FEEDBACK_ADDED_SUCCESSFULLY = "%s added feedback successfully!";
-    public final int EXPECTED_PARAMS = 4;
+    private final static String FEEDBACK_ADDED_SUCCESSFULLY = "Feedback %s added to board %s successfully!";
+    public final int EXPECTED_PARAMS = 5;
     public CreateFeedbackInBoard(TaskManagementRepository taskManagementRepository) {
         super(taskManagementRepository);
     }
@@ -32,15 +32,16 @@ public class CreateFeedbackInBoard extends BaseCommand {
         String description = parameters.get(1);
         FeedbackStatus feedbackStatus = ParsingHelpers.tryParseEnum(parameters.get(2),FeedbackStatus.class);
         int rating = ParsingHelpers.tryParseInt(parameters.get(3),INVALID_RATING);
+        String boardName = parameters.get(4);
 
-        return createFeedback(title,description,feedbackStatus,rating);
+        return createFeedback(title,description,feedbackStatus,rating,boardName);
     }
 
-    private String createFeedback(String title, String description, FeedbackStatus feedbackStatus, int rating){
+    private String createFeedback(String title, String description, FeedbackStatus feedbackStatus, int rating,String boardName){
         Feedback feedback = getTaskManagementRepository().createFeedback(title,description,feedbackStatus,rating);
+        Board board = getTaskManagementRepository().findBoardByName(boardName);
+        getTaskManagementRepository().addTaskToBoard(feedback,board);
 
-        getTaskManagementRepository().getFeedbacks().add(feedback);
-
-        return String.format(FEEDBACK_ADDED_SUCCESSFULLY, getTaskManagementRepository().findFeedbackByTitle(title));
+        return String.format(FEEDBACK_ADDED_SUCCESSFULLY,title,boardName);
     }
 }

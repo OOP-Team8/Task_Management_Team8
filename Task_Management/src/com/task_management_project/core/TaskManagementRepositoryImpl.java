@@ -6,6 +6,7 @@ import com.task_management_project.models.contracts.*;
 import com.task_management_project.models.enums.*;
 import com.task_management_project.utils.Validation;
 
+import java.lang.reflect.Member;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -143,4 +144,19 @@ public class TaskManagementRepositoryImpl  implements TaskManagementRepository {
         boards.add(board);
         return board;
     }
+
+    @Override
+    public Board findBoardByName(String name) {
+        return boards.stream().filter(t -> t.getName()==name).findFirst().orElseThrow(()-> new IllegalArgumentException("This board doesn't exist!"));
+    }
+
+    @Override
+    public void addTaskToBoard(Task task, Board board){
+        board.addTask(task);
+    }
+    @Override
+    public void addTaskToMember(Task task, Person member){
+        member.addTask(task);
+    }
+
 }

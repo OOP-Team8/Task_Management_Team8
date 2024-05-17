@@ -3,6 +3,7 @@ package com.task_management_project.commands.create;
 import com.task_management_project.commands.BaseCommand;
 import com.task_management_project.core.contracts.TaskManagementRepository;
 import com.task_management_project.models.PersonImpl;
+import com.task_management_project.models.contracts.Board;
 import com.task_management_project.models.contracts.Bug;
 import com.task_management_project.models.contracts.Feedback;
 import com.task_management_project.models.contracts.Person;
@@ -17,8 +18,9 @@ import java.util.List;
 
 public class CreateBugInBoard extends BaseCommand {
 
-    private final static String BUG_ADDED_SUCCESSFULLY = "%s added bug successfully!";
-    private final int EXPECTED_PARAMS = 6;
+    private final static String BUG_ADDED_SUCCESSFULLY = "Bug %s added to board %s successfully!";
+
+    private final int EXPECTED_PARAMS = 7;
     public CreateBugInBoard(TaskManagementRepository taskManagementRepository) {
         super(taskManagementRepository);
     }
@@ -33,18 +35,18 @@ public class CreateBugInBoard extends BaseCommand {
         Priority priority = ParsingHelpers.tryParseEnum(parameters.get(3),Priority.class);
         BugSeverity bugSeverity = ParsingHelpers.tryParseEnum(parameters.get(4),BugSeverity.class);
         Person person = getTaskManagementRepository().findPersonByName(parameters.get(5));
+        String boardName = parameters.get(6);
 
-
-        return createBug(title, description,priority, bugStatus, bugSeverity,person);
+        return createBug(title, description,priority, bugStatus, bugSeverity,person, boardName);
     }
 
-
-
-    private String createBug( String title, String description,  Priority priority,BugStatus bugStatus, BugSeverity bugSeverity,Person person){
+    private String createBug( String title, String description,  Priority priority,BugStatus bugStatus, BugSeverity bugSeverity,Person person, String boardName){
         Bug bug = getTaskManagementRepository().createBug(title, description, priority, bugStatus, bugSeverity,person);
+        Board board = getTaskManagementRepository().findBoardByName(boardName);
+        getTaskManagementRepository().addTaskToBoard(bug,board);
+        getTaskManagementRepository().addTaskToMember(bug, person);
 
-        getTaskManagementRepository().getBugs().add(bug);
 
-        return String.format(BUG_ADDED_SUCCESSFULLY, getTaskManagementRepository().findBugByTitle(title));
+        return String.format(BUG_ADDED_SUCCESSFULLY,title,boardName);
     }
 }

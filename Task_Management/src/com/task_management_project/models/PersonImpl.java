@@ -1,7 +1,6 @@
 package com.task_management_project.models;
 import com.task_management_project.models.contracts.EventLog;
 import com.task_management_project.models.contracts.Person;
-import com.task_management_project.models.contracts.Story;
 import com.task_management_project.models.contracts.Task;
 import com.task_management_project.utils.contracts.DataValidation;
 import com.task_management_project.utils.Validation;
@@ -59,5 +58,10 @@ public class PersonImpl implements Person {
 
     public static List<String> getNames() {
         return new ArrayList<>(names);
+    }
+
+    @Override
+    public void addTask(Task task){
+        tasks.add(task);
     }
 }
