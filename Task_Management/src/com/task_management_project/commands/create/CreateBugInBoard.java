@@ -19,8 +19,8 @@ import java.util.List;
 public class CreateBugInBoard extends BaseCommand {
 
     private final static String BUG_ADDED_SUCCESSFULLY = "Bug %s added to board %s successfully!";
-
     private final int EXPECTED_PARAMS = 7;
+
     public CreateBugInBoard(TaskManagementRepository taskManagementRepository) {
         super(taskManagementRepository);
     }

@@ -12,6 +12,7 @@ public class CreateNewBoardInTeam extends BaseCommand {
     public final int EXPECTED_PARAMS = 1;
     private final static String BOARD_CREATED_SUCCESSFULLY = "Board %s created in Team %s successfully!";
 
+
     public CreateNewBoardInTeam(TaskManagementRepository taskManagementRepository) {
         super(taskManagementRepository);
     }

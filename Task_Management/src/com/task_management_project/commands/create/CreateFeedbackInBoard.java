@@ -17,9 +17,9 @@ import java.util.List;
 
 public class CreateFeedbackInBoard extends BaseCommand {
     private static final String INVALID_RATING = "Invalid rating";
-
     private final static String FEEDBACK_ADDED_SUCCESSFULLY = "Feedback %s added to board %s successfully!";
     public final int EXPECTED_PARAMS = 5;
+
     public CreateFeedbackInBoard(TaskManagementRepository taskManagementRepository) {
         super(taskManagementRepository);
     }

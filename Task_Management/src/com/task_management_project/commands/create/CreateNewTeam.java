@@ -9,7 +9,6 @@ import java.util.List;
 
 public class CreateNewTeam extends BaseCommand {
     public final int EXPECTED_PARAMS = 1;
-
     private final static String TEAM_CREATED_SUCCESSFULLY = "Team %s created successfully!";
 
     public CreateNewTeam(TaskManagementRepository taskManagementRepository) {
