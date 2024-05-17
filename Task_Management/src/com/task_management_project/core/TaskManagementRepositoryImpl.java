@@ -6,7 +6,6 @@ import com.task_management_project.models.contracts.*;
 import com.task_management_project.models.enums.*;
 import com.task_management_project.utils.Validation;
 
-import java.lang.reflect.Member;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -65,12 +64,22 @@ public class TaskManagementRepositoryImpl  implements TaskManagementRepository {
         return new ArrayList<>(feedbacks);
     }
 
+    //ADDS PERSON TO LIST PEOPLE
     @Override
     public void addPerson(Person personToAdd) {
         if (people.contains(personToAdd)){
             throw new IllegalArgumentException("Already in the list");
         }
         this.people.add(personToAdd);
+    }
+
+    //ADDS TEAM TO LIST TEAMS
+    @Override
+    public void addTeam(Team team){
+        if (teams.contains(team)){
+            throw new IllegalArgumentException("Already in the list");
+        }
+        this.teams.add(team);
     }
 
     @Override

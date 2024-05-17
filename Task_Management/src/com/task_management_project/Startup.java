@@ -9,14 +9,5 @@ public class Startup {
         TaskManagementEngineImpl engine = new TaskManagementEngineImpl();
         engine.start();
 
-//        Person person = new PersonImpl("Ivan123");
-//        Person person1 = new PersonImpl("Ivan123");
-//        Person person2 = new PersonImpl("Pesho123");
-//        Person person3 = new PersonImpl("Pesho123");
-//        Person person4 = new PersonImpl("Dimitar");
-//
-//        for (String name : PersonImpl.getNames()) {
-//            System.out.println(name);
-//        }
     }
 }

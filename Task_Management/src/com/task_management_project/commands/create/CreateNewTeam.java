@@ -9,6 +9,9 @@ import java.util.List;
 
 public class CreateNewTeam extends BaseCommand {
     public final int EXPECTED_PARAMS = 1;
+
+    private final static String TEAM_CREATED_SUCCESSFULLY = "Team %s created successfully!";
+
     public CreateNewTeam(TaskManagementRepository taskManagementRepository) {
         super(taskManagementRepository);
     }
@@ -16,7 +19,17 @@ public class CreateNewTeam extends BaseCommand {
     @Override
     protected String executeCommand(List<String> parameters) {
         Validation.validateArgumentsCount(parameters,EXPECTED_PARAMS);
-        Team team = getTaskManagementRepository().createTeam(parameters.get(0));
-        return team.getName();
+
+        String name = parameters.get(0);
+
+        return createTeam(name);
+    }
+
+    public String createTeam(String name){
+        Team team = getTaskManagementRepository().createTeam(name);
+
+        getTaskManagementRepository().addTeam(team);
+
+        return String.format(TEAM_CREATED_SUCCESSFULLY,name);
     }
 }
