@@ -6,6 +6,7 @@ import com.task_management_project.models.contracts.Task;
 import com.task_management_project.utils.contracts.DataValidation;
 import com.task_management_project.utils.Validation;
 
+import java.io.ObjectInputFilter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -23,11 +24,11 @@ public abstract class TaskImpl implements Task {
     }
 
     public int getId() {
-        return this.id;
+        return id;
     }
 
     public String getTitle() {
-        return this.title;
+        return title;
     }
 
     private void setTitle(String title) {
@@ -39,7 +40,7 @@ public abstract class TaskImpl implements Task {
     }
 
     public String getDescription() {
-        return this.description;
+        return description;
     }
 
     private void setDescription(String description) {
@@ -51,10 +52,10 @@ public abstract class TaskImpl implements Task {
     }
 
     public List<Comment> getCommentList() {
-        return new ArrayList(this.comments);
+        return new ArrayList(comments);
     }
 
     public List<EventLog> getChangesList() {
-        return new ArrayList(this.eventList);
+        return new ArrayList(eventList);
     }
 }

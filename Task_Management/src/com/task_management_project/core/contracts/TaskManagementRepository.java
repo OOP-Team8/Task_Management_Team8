@@ -1,6 +1,9 @@
 package com.task_management_project.core.contracts;
 
 import com.task_management_project.models.contracts.*;
+import com.task_management_project.models.enums.BugSeverity;
+import com.task_management_project.models.enums.BugStatus;
+import com.task_management_project.models.enums.Priority;
 
 import java.util.List;
 
@@ -20,7 +23,7 @@ public interface TaskManagementRepository {
     Team createTeam(String name);
     Team findTeamByName(String name);
 
-    Bug createBug(int id, String title, String description);
+    Bug createBug(int id, String title, String description, Priority priority, BugStatus bugStatus, BugSeverity bugSeverity,Person person);
 
     Board createBoard(String name);
 }

@@ -6,6 +6,9 @@ import com.task_management_project.models.BugImpl;
 import com.task_management_project.models.PersonImpl;
 import com.task_management_project.models.TeamImpl;
 import com.task_management_project.models.contracts.*;
+import com.task_management_project.models.enums.BugSeverity;
+import com.task_management_project.models.enums.BugStatus;
+import com.task_management_project.models.enums.Priority;
 import com.task_management_project.utils.Validation;
 import com.task_management_project.utils.contracts.DataValidation;
 
@@ -83,8 +86,10 @@ public class TaskManagementRepositoryImpl  implements TaskManagementRepository {
     }
 
     @Override
-    public Bug createBug(int id, String title, String description) {
-        return new BugImpl(++id,title,description);
+    public Bug createBug(int id, String title, String description, Priority priority, BugStatus bugStatus, BugSeverity bugSeverity,Person person) {
+        Bug bug = new BugImpl(++id,title,description,priority,bugStatus,bugSeverity,person);
+        tasks.add(bug);
+        return bug;
     }
 
     @Override

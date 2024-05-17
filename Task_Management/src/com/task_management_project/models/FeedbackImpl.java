@@ -20,6 +20,7 @@ public class FeedbackImpl extends TaskImpl implements Feedback {
         this.eventList.add(new EventLogImpl("It was created a new feedback!"));
     }
 
+    @Override
     public int getRating() {
         return this.rating;
     }
@@ -36,6 +37,7 @@ public class FeedbackImpl extends TaskImpl implements Feedback {
         return this.status;
     }
 
+    //TODO
     @Override
     public String getAsString() {
         return null;
