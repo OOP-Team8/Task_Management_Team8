@@ -1,30 +1,32 @@
 package com.task_management_project.core;
 
 import com.task_management_project.core.contracts.TaskManagementRepository;
-import com.task_management_project.models.BoardImpl;
-import com.task_management_project.models.BugImpl;
-import com.task_management_project.models.PersonImpl;
-import com.task_management_project.models.TeamImpl;
+import com.task_management_project.models.*;
 import com.task_management_project.models.contracts.*;
-import com.task_management_project.models.enums.BugSeverity;
-import com.task_management_project.models.enums.BugStatus;
-import com.task_management_project.models.enums.Priority;
+import com.task_management_project.models.enums.*;
 import com.task_management_project.utils.Validation;
-import com.task_management_project.utils.contracts.DataValidation;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class TaskManagementRepositoryImpl  implements TaskManagementRepository {
+    private static int id;
     private List<Person> people;
     private List<Task> tasks;
     private List<Board> boards;
     private List<Team> teams;
+    private List<Bug> bugs;
+    private List<Feedback> feedbacks;
+    private List<Story> stories;
     public TaskManagementRepositoryImpl(){
+        id = 0;
         people = new ArrayList<>();
         tasks = new ArrayList<>();
         boards = new ArrayList<>();
         teams = new ArrayList<>();
+        bugs = new ArrayList<>();
+        feedbacks = new ArrayList<>();
+        stories = new ArrayList<>();
     }
 
     @Override
@@ -45,6 +47,21 @@ public class TaskManagementRepositoryImpl  implements TaskManagementRepository {
     @Override
     public List<Team> getTeams() {
         return new ArrayList<>(teams);
+    }
+
+    @Override
+    public List<Bug> getBugs() {
+        return new ArrayList<>(bugs);
+    }
+
+    @Override
+    public List<Story> getStories() {
+        return new ArrayList<>(stories);
+    }
+
+    @Override
+    public List<Feedback> getFeedbacks() {
+        return new ArrayList<>(feedbacks);
     }
 
     @Override
@@ -74,6 +91,19 @@ public class TaskManagementRepositoryImpl  implements TaskManagementRepository {
     }
 
     @Override
+    public Bug findBugByTitle(String title) {
+        return bugs.stream().filter(t -> t.getTitle()==title).findFirst().orElseThrow(()-> new IllegalArgumentException("This title doesn't exist!"));
+    }
+    @Override
+    public Story findStoryByTitle(String title) {
+        return stories.stream().filter(t -> t.getTitle()==title).findFirst().orElseThrow(()-> new IllegalArgumentException("This title doesn't exist!"));
+    }
+    @Override
+    public Feedback findFeedbackByTitle(String title) {
+        return feedbacks.stream().filter(t -> t.getTitle()==title).findFirst().orElseThrow(()-> new IllegalArgumentException("This title doesn't exist!"));
+    }
+
+    @Override
     public Team createTeam(String name) {
         Validation.validateDubs(teams,name);
         Team team = new TeamImpl(name);
@@ -86,14 +116,31 @@ public class TaskManagementRepositoryImpl  implements TaskManagementRepository {
     }
 
     @Override
-    public Bug createBug(int id, String title, String description, Priority priority, BugStatus bugStatus, BugSeverity bugSeverity,Person person) {
+    public Bug createBug(String title, String description, Priority priority, BugStatus bugStatus, BugSeverity bugSeverity,Person person) {
         Bug bug = new BugImpl(++id,title,description,priority,bugStatus,bugSeverity,person);
-        tasks.add(bug);
+        bugs.add(bug);
+      //  tasks.add(bug);
         return bug;
+    }
+    @Override
+    public Feedback createFeedback(String title, String description, FeedbackStatus status, int rating){
+        Feedback feedback = new FeedbackImpl(++id,title,description,status,rating);
+        feedbacks.add(feedback);
+        //tasks.add(feedback);
+        return feedback;
+    }
+    @Override
+    public Story createStory(String title, String description, Priority priority, StoryStatus storyStatus, Size size, Person person){
+        Story story = new StoryImpl(++id,title,description,priority,storyStatus,size,person);
+        stories.add(story);
+        //tasks.add(story);
+        return story;
     }
 
     @Override
     public Board createBoard(String name) {
-        return new BoardImpl(name);
+        Board board = new BoardImpl(name);
+        boards.add(board);
+        return board;
     }
 }

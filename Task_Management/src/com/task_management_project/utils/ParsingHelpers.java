@@ -25,4 +25,5 @@ public class ParsingHelpers {
             throw new IllegalArgumentException(String.format(NO_SUCH_ENUM, valueToParse, type.getSimpleName()));
         }
     }
+
 }

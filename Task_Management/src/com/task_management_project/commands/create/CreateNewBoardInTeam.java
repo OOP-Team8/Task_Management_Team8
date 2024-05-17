@@ -17,7 +17,6 @@ public class CreateNewBoardInTeam extends BaseCommand {
     protected String executeCommand(List<String> parameters) {
         Validation.validateArgumentsCount(parameters,EXPECTED_PARAMS);
         Board board = getTaskManagementRepository().createBoard(parameters.get(0));
-
         return board.getName();
     }
 }
