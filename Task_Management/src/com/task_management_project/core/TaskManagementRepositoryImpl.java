@@ -11,13 +11,13 @@ import java.util.List;
 
 public class TaskManagementRepositoryImpl implements TaskManagementRepository {
     private static int nextId;
-    private List<Person> people;
-    private List<Task> tasks;
-    private List<Board> boards;
-    private List<Team> teams;
-    private List<Bug> bugs;
-    private List<Feedback> feedbacks;
-    private List<Story> stories;
+    private final List<Person> people;
+    private final List<Task> tasks;
+    private final List<Board> boards;
+    private final List<Team> teams;
+    private final List<Bug> bugs;
+    private final List<Feedback> feedbacks;
+    private final List<Story> stories;
 
     public TaskManagementRepositoryImpl() {
         people = new ArrayList<>();
@@ -100,7 +100,6 @@ public class TaskManagementRepositoryImpl implements TaskManagementRepository {
     public Person createPerson(String name) {
         Validation.validateDubs(people, name);
         Person person = new PersonImpl(name);
-        //people.add(person);
         return person;
     }
 
@@ -128,18 +127,19 @@ public class TaskManagementRepositoryImpl implements TaskManagementRepository {
     public Team createTeam(String name) {
         Validation.validateDubs(teams, name);
         Team team = new TeamImpl(name);
-        //teams.add(team);
         return team;
     }
 
     @Override
     public Team findTeamByName(String name) {
-        return teams.stream().filter(t -> t.getName().equals(name)).findFirst().orElseThrow(() -> new IllegalArgumentException("This team doesn't exist!"));
+        Team team = teams.stream().filter(t -> t.getName().equals(name)).findFirst().orElseThrow(() -> new IllegalArgumentException("This team doesn't exist!"));
+        return team;
     }
 
     @Override
     public Board findBoardByName(String name) {
-        return null;
+        Board board = boards.stream().filter(t -> t.getName().equals(name)).findFirst().orElseThrow(() -> new IllegalArgumentException("This board doesn't exist!"));
+        return board;
     }
 
     @Override
@@ -168,12 +168,13 @@ public class TaskManagementRepositoryImpl implements TaskManagementRepository {
 
     @Override
     public Board createBoard(String name) {
-        return new BoardImpl(name);
+        Board board = new BoardImpl(name);
+        boards.add(board);
+        return board;
     }
 
     @Override
     public void addTaskToBoard(Task task, Board board) {
-        //findBoardByName(board).addTask(task);
         board.addTask(task);
     }
 
@@ -181,5 +182,4 @@ public class TaskManagementRepositoryImpl implements TaskManagementRepository {
     public void addTaskToMember(Task task, Person member) {
         member.addTask(task);
     }
-
 }

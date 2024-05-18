@@ -11,11 +11,11 @@ import java.util.List;
 
 public class BoardImpl implements Board {
     private String name;
-    private List<Task> boardTasks;
-    private List<EventLog> eventLogList;
+    private final List<Task> boardTasks;
+    private final List<EventLog> eventLogList;
 
     public BoardImpl(String name) {
-        this.name = name;
+        setName(name);
         boardTasks = new ArrayList<>();
         eventLogList = new ArrayList<>();
     }

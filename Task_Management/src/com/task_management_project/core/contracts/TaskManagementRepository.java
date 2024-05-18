@@ -21,8 +21,6 @@ public interface TaskManagementRepository {
     Comment createComment(Person author, String content);
 
     void addPerson(Person personToAdd);
-
-    //ADDS TEAM TO LIST TEAMS
     void addTeam(Team team);
 
     Person findPersonByName(String name);

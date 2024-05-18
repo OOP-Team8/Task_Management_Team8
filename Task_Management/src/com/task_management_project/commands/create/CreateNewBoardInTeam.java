@@ -20,18 +20,15 @@ public class CreateNewBoardInTeam extends BaseCommand {
     @Override
     protected String executeCommand(List<String> parameters) {
         Validation.validateArgumentsCount(parameters, EXPECTED_PARAMS);
-
         String name = parameters.get(0);
         String teamName = parameters.get(1);
-
         return createBoard(name, teamName);
     }
 
     public String createBoard(String name, String teamName) {
-        Board board = getTaskManagementRepository().createBoard(name);
         Team team = getTaskManagementRepository().findTeamByName(teamName);
+        Board board = getTaskManagementRepository().createBoard(name);
         team.addBoard(board);
-
         return String.format(BOARD_CREATED_SUCCESSFULLY, name, teamName);
     }
 }

@@ -37,22 +37,16 @@ public class CreateBugInBoard extends BaseCommand {
         Person person = getTaskManagementRepository().findPersonByName(parameters.get(5));
         String boardName = parameters.get(6);
 
-        Bug bug = getTaskManagementRepository().createBug(title, description, priority, bugStatus, bugSeverity, person);
+        return createBug(title, description, priority, bugStatus, bugSeverity, person, boardName);
+    }
+
+    private String createBug(String title, String description,  Priority priority,BugStatus bugStatus, BugSeverity bugSeverity,Person person, String boardName){
+        Bug bug = getTaskManagementRepository().createBug(title, description, priority, bugStatus, bugSeverity,person);
         Board board = getTaskManagementRepository().findBoardByName(boardName);
 
-        board.getTasks().add(bug);
+        getTaskManagementRepository().addTaskToBoard(bug,board);
+        getTaskManagementRepository().addTaskToMember(bug, person);
 
         return String.format(BUG_ADDED_SUCCESSFULLY,title,boardName);
     }
-
-//    private String createBug(String title, String description,  Priority priority,BugStatus bugStatus, BugSeverity bugSeverity,Person person, String boardName){
-//        Bug bug = getTaskManagementRepository().createBug(title, description, priority, bugStatus, bugSeverity,person);
-//        Board board = getTaskManagementRepository().findBoardByName(boardName);
-//        board.addTask(bug);
-////        getTaskManagementRepository().addTaskToBoard(bug,board);
-////        getTaskManagementRepository().addTaskToMember(bug, person);
-//
-//
-//        return String.format(BUG_ADDED_SUCCESSFULLY,title,boardName);
-//    }
 }
