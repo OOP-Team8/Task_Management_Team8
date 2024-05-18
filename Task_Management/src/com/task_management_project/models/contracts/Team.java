@@ -1,13 +1,8 @@
 package com.task_management_project.models.contracts;
 
-import com.task_management_project.models.BoardImpl;
-import com.task_management_project.models.PersonImpl;
-
 import java.util.List;
 
-public interface Team {
-
-    String getName();
+public interface Team extends Nameable {
 
     List<Person> getMembers();
 
@@ -16,4 +11,6 @@ public interface Team {
     void addMember(Person person);
 
     void addBoard(Board board);
+
+
 }

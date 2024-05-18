@@ -16,48 +16,31 @@ public class FeedbackImpl extends TaskImpl implements Feedback {
     public FeedbackImpl(int id, String title, String description, FeedbackStatus status, int rating) {
         super(id, title, description);
         this.status = status;
-        this.setRating(rating);
+        setRating(rating);
         this.eventList.add(new EventLogImpl("It was created a new feedback!"));
     }
 
+    @Override
     public int getRating() {
         return this.rating;
     }
-
-    private void setRating(int rating) {
-        Validation.validateIntPositiveValue(rating, "The value should be positive");
-        this.eventList.add(new EventLogImpl(String.format("The rating was changed to %d", rating)));
-        this.rating = rating;
-    }
-
+    @Override
     public FeedbackStatus getStatus() {
         return this.status;
     }
 
+    private void setRating(int rating) {
+        Validation.validateIntPositiveValue(rating, "The value should be positive");
+        if (this.rating != 0){
+            this.eventList.add(new EventLogImpl(String.format("The rating was changed to %d", rating)));
+        }
+        this.rating = rating;
+    }
+
+
     //TODO
-
     @Override
-    public int getId() {
-        return 0;
-    }
-
-    @Override
-    public String getTitle() {
-        return null;
-    }
-
-    @Override
-    public String getDescription() {
-        return null;
-    }
-
-    @Override
-    public List<Comment> getCommentList() {
-        return null;
-    }
-
-    @Override
-    public List<EventLog> getChangesList() {
+    public String getAsString() {
         return null;
     }
 }

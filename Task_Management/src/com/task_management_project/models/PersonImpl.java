@@ -12,35 +12,34 @@ import java.util.List;
 public class PersonImpl implements Person {
 
     private String name;
-    private List<Task> tasks;
-    private List<EventLog> history;
-    private List<String> names = new ArrayList();
+    private List<Task> tasks = new ArrayList<>();
+    private List<EventLog> history = new ArrayList<>();
 
-    public PersonImpl(String name, List<Task> tasks, List<Story> history) {
-        this.setName(name);
-        new ArrayList();
-        new ArrayList();
+    public PersonImpl(String name) {
+        setName(name);
+        history.add(new EventLogImpl(String.format("New employee was appointed - %s",this.name)));
     }
 
+    @Override
     public String getName() {
         return this.name;
     }
 
     private void setName(String name) {
-        if (!this.names.isEmpty() && this.names.contains(name)) {
-            throw new IllegalArgumentException();
-        } else {
-            Validation.validateStringLength(name, 5, 15, DataValidation.NAME_ERROR);
-            this.names.add(name);
-            this.name = name;
-        }
+        Validation.validateStringLength(name, 5, 15, DataValidation.NAME_ERROR);
+        this.name = name;
     }
-
+    @Override
     public List<Task> getTasks() {
-        return new ArrayList(this.tasks);
+        return new ArrayList<>(tasks);
+    }
+    @Override
+    public List<EventLog> getLogs() {
+        return new ArrayList<>(history);
     }
 
-    public List<EventLog> getEventLog() {
-        return new ArrayList(this.history);
+    @Override
+    public void addTask(Task task) {
+
     }
 }

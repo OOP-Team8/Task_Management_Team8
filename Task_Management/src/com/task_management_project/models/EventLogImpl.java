@@ -5,6 +5,7 @@ import com.task_management_project.models.contracts.EventLog;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.List;
 
 public class EventLogImpl implements EventLog {
     private String description;
@@ -19,6 +20,7 @@ public class EventLogImpl implements EventLog {
         this.description = description;
     }
 
+    @Override
     public String viewInfo() {
         String string = String.format("%s %s", getLocalDateTime().format(formatter), this.description);
         if (!string.isEmpty()) {
@@ -27,4 +29,5 @@ public class EventLogImpl implements EventLog {
             throw new IllegalArgumentException();
         }
     }
+
 }

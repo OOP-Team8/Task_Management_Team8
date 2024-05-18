@@ -2,8 +2,8 @@ package com.task_management_project.models.enums;
 
 public enum BugSeverity {
     CRITICAL,
-    HUGE,
-    SMALL;
+    MAJOR,
+    MINOR;
 
     @Override
     public String toString() {
@@ -11,11 +11,11 @@ public enum BugSeverity {
             case CRITICAL -> {
                 return "Critical";
             }
-            case HUGE -> {
-                return "Huge";
+            case MAJOR -> {
+                return "Major";
             }
-            case SMALL -> {
-                return "Small";
+            case MINOR -> {
+                return "Minor";
             }
             default -> {
                 return "";

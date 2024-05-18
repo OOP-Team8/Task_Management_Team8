@@ -1,11 +1,13 @@
-package com.task_management_project.commands;
+package com.task_management_project.commands.assignAndUnassign;
 
+import com.task_management_project.commands.BaseCommand;
 import com.task_management_project.core.contracts.TaskManagementRepository;
 
 import java.util.List;
 
-public class CreateNewBoardInTeam extends BaseCommand{
-    public CreateNewBoardInTeam(TaskManagementRepository taskManagementRepository) {
+public class UnassignTaskToPerson extends BaseCommand {
+
+    public UnassignTaskToPerson(TaskManagementRepository taskManagementRepository) {
         super(taskManagementRepository);
     }
 

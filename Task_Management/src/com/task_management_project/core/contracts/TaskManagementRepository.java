@@ -1,22 +1,47 @@
 package com.task_management_project.core.contracts;
 
 import com.task_management_project.models.contracts.*;
+import com.task_management_project.models.enums.*;
 
+import java.lang.reflect.Member;
 import java.util.List;
 
 public interface TaskManagementRepository {
 
-    Person addPerson(Person personToAdd);
+    List<Bug> getBugs();
+    List<Story> getStories();
+    List<Feedback> getFeedbacks();
+    List<Person> getPeople();
+    List<Task> getTasks();
+    List<Board> getBoards();
+    List<Team> getTeams();
+
+    void addComment(Task task, Comment comment);
+
+    Comment createComment(Person author, String content);
+
+    void addPerson(Person personToAdd);
+    void addTeam(Team team);
 
     Person findPersonByName(String name);
-
-    Person createPerson(String name, List<Task> tasks, List<Story> history);
-
+    Task findTaskById(int id);
+    Bug findBugByTitle(String title);
+    Story findStoryByTitle(String title);
+    Feedback findFeedbackByTitle(String title);
+    Team findTeamByName(String name);
+    Board findBoardByName(String name);
+    Person createPerson(String name);
     Team createTeam(String name);
 
-    Bug createBug(int id, String title, String description);
+    Bug createBug(String title, String description, Priority priority, BugStatus bugStatus, BugSeverity bugSeverity,Person person);
 
-    Board createBoard(String name, List<Task> boardTasks,List<EventLog> eventLogList);
+    Feedback createFeedback(String title, String description, FeedbackStatus status, int rating);
 
-    List<EventLog> getTeamActivity();
+    Story createStory(String title, String description, Priority priority, StoryStatus storyStatus, Size size, Person person);
+
+    Board createBoard(String name);
+
+    void addTaskToBoard(Task task, Board board);
+
+    void addTaskToMember(Task task, Person member);
 }

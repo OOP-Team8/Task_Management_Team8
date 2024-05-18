@@ -1,11 +1,12 @@
-package com.task_management_project.commands;
+package com.task_management_project.commands.change;
 
+import com.task_management_project.commands.BaseCommand;
 import com.task_management_project.core.contracts.TaskManagementRepository;
 
 import java.util.List;
 
-public class CreateNewPerson extends  BaseCommand{
-    public CreateNewPerson(TaskManagementRepository taskManagementRepository) {
+public class ChangeStatusInStory extends BaseCommand {
+    public ChangeStatusInStory(TaskManagementRepository taskManagementRepository) {
         super(taskManagementRepository);
     }
 
