@@ -37,7 +37,7 @@ public class CreateStoryInBoard extends BaseCommand {
         return createStory(title, description,priority, storyStatus, size,person,boardName);
     }
 
-    private String createStory( String title, String description,Priority priority, StoryStatus storyStatus, Size size,Person person,String boardName){
+    private String createStory(String title, String description,Priority priority, StoryStatus storyStatus, Size size,Person person,String boardName){
         Story story = getTaskManagementRepository().createStory(title,description,priority,storyStatus,size,person);
         Board board = getTaskManagementRepository().findBoardByName(boardName);
         getTaskManagementRepository().addTaskToBoard(story,board);

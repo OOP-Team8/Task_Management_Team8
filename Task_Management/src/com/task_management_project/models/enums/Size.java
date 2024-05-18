@@ -4,7 +4,6 @@ public enum Size {
     LARGE,
     MEDIUM,
     SMALL;
-
     @Override
     public String toString() {
         switch (this){

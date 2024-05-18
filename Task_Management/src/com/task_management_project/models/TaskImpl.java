@@ -11,7 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public abstract class TaskImpl implements Task {
-    private int id = 0;
+    private int id;
     private String title;
     private String description;
     protected List<Comment> comments = new ArrayList();

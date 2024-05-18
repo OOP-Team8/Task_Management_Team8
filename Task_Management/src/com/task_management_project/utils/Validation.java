@@ -1,6 +1,6 @@
 package com.task_management_project.utils;
 
-import com.task_management_project.models.contracts.Nameable;
+import com.task_management_project.models.contracts.*;
 import com.task_management_project.utils.contracts.DataValidation;
 
 import java.util.List;
@@ -32,5 +32,11 @@ public class Validation implements DataValidation {
                 throw new IllegalArgumentException(NOT_UNIQUE_NAME);
             }
         }
+    }
+    public static <T extends Loggable> StringBuilder message(StringBuilder builder, T value, List<EventLog> list){
+        for (EventLog item : list) {
+            builder.append(value.getLogs().indexOf(item) +1).append(". ").append(value.getLogs()).append(value.getLogs().indexOf(item) + 1 < value.getLogs().size() ? System.lineSeparator() : "");
+        }
+        return builder;
     }
 }

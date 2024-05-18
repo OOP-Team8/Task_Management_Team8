@@ -1,6 +1,7 @@
 package com.task_management_project.models;
 import com.task_management_project.models.contracts.EventLog;
 import com.task_management_project.models.contracts.Person;
+import com.task_management_project.models.contracts.Story;
 import com.task_management_project.models.contracts.Task;
 import com.task_management_project.utils.contracts.DataValidation;
 import com.task_management_project.utils.Validation;
@@ -13,7 +14,6 @@ public class PersonImpl implements Person {
     private String name;
     private List<Task> tasks = new ArrayList<>();
     private List<EventLog> history = new ArrayList<>();
-    private static List<String> names = new ArrayList<>();
 
     public PersonImpl(String name) {
         setName(name);
@@ -25,27 +25,8 @@ public class PersonImpl implements Person {
     }
 
     private void setName(String name) {
-        try {
-//            if (names.isEmpty() || !names.contains(name)) {
-//                Validation.validateStringLength(name, 5, 15, DataValidation.NAME_ERROR);
-//                names.add(name);
-//                this.name = name;
-//            }
-//            else {
-//                throw new IllegalArgumentException("It was used!");
-//            }
-//            for (String nameItem : names) {
-//                if (nameItem.equals(name)){
-//                    throw new IllegalArgumentException(String.format("The name %s was used!",name));
-//                }
-//            }
-            Validation.validateStringLength(name, 5, 15, DataValidation.NAME_ERROR);
-            names.add(name);
-            this.name = name;
-        }
-        catch (IllegalArgumentException ex){
-            System.out.println(ex.getMessage());
-        }
+        Validation.validateStringLength(name, 5, 15, DataValidation.NAME_ERROR);
+        this.name = name;
     }
     @Override
     public List<Task> getTasks() {
@@ -56,12 +37,8 @@ public class PersonImpl implements Person {
         return new ArrayList<>(history);
     }
 
-    public static List<String> getNames() {
-        return new ArrayList<>(names);
-    }
-
     @Override
-    public void addTask(Task task){
-        tasks.add(task);
+    public void addTask(Task task) {
+
     }
 }

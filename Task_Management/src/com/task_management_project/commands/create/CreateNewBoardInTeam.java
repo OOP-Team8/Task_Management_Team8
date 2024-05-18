@@ -10,9 +10,6 @@ import java.util.List;
 
 public class CreateNewBoardInTeam extends BaseCommand {
     public final int EXPECTED_PARAMS = 1;
-    private final static String BOARD_CREATED_SUCCESSFULLY = "Board %s created in Team %s successfully!";
-
-
     public CreateNewBoardInTeam(TaskManagementRepository taskManagementRepository) {
         super(taskManagementRepository);
     }
@@ -20,18 +17,8 @@ public class CreateNewBoardInTeam extends BaseCommand {
     @Override
     protected String executeCommand(List<String> parameters) {
         Validation.validateArgumentsCount(parameters,EXPECTED_PARAMS);
+        Board board = getTaskManagementRepository().createBoard(parameters.get(0));
 
-        String name = parameters.get(0);
-        String teamName = parameters.get(1);
-
-        return createBoard(name,teamName);
-    }
-
-    public String createBoard(String name,String teamName){
-        Board board = getTaskManagementRepository().createBoard(name);
-        Team team = getTaskManagementRepository().findTeamByName(teamName);
-        team.addBoard(board);
-
-        return String.format(BOARD_CREATED_SUCCESSFULLY,name,teamName);
+        return board.getName();
     }
 }

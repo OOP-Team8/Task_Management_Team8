@@ -16,10 +16,14 @@ public interface TaskManagementRepository {
     List<Board> getBoards();
     List<Team> getTeams();
 
+    void addComment(Task task, Comment comment);
+
+    Comment createComment(Person author, String content);
+
     void addPerson(Person personToAdd);
+
+    //ADDS TEAM TO LIST TEAMS
     void addTeam(Team team);
-    void addTaskToBoard(Task task, Board board);
-    void addTaskToMember(Task task, Person member);
 
     Person findPersonByName(String name);
     Task findTaskById(int id);
@@ -28,13 +32,18 @@ public interface TaskManagementRepository {
     Feedback findFeedbackByTitle(String title);
     Team findTeamByName(String name);
     Board findBoardByName(String name);
-
-
     Person createPerson(String name);
     Team createTeam(String name);
+
     Bug createBug(String title, String description, Priority priority, BugStatus bugStatus, BugSeverity bugSeverity,Person person);
-    Story createStory(String title, String description, Priority priority, StoryStatus storyStatus, Size size, Person person);
-    Board createBoard(String name);
+
     Feedback createFeedback(String title, String description, FeedbackStatus status, int rating);
 
+    Story createStory(String title, String description, Priority priority, StoryStatus storyStatus, Size size, Person person);
+
+    Board createBoard(String name);
+
+    void addTaskToBoard(Task task, Board board);
+
+    void addTaskToMember(Task task, Person member);
 }

@@ -11,11 +11,13 @@ import java.util.List;
 
 public class TeamImpl implements Team {
     private String name;
-    private List<Person> members = new ArrayList();
-    private List<Board> boards = new ArrayList();
+    private List<Person> members;
+    private List<Board> boards;
 
     public TeamImpl(String name) {
         this.setName(name);
+        members = new ArrayList<>();
+        boards = new ArrayList<>();
     }
 
     @Override

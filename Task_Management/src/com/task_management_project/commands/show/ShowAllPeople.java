@@ -19,8 +19,8 @@ public class ShowAllPeople extends BaseCommand {
         Validation.validateArgumentsCount(parameters,EXPECTED_PARAMS);
         StringBuilder builder = new StringBuilder("--EMPLOYEES--" + System.lineSeparator());
         for (Person person : getTaskManagementRepository().getPeople()) {
-            builder.append(getTaskManagementRepository().getPeople().indexOf(person)+1 + ". " + person.getName() +
-                    ((getTaskManagementRepository().getPeople().indexOf(person)+1 < getTaskManagementRepository().getPeople().size()) ? System.lineSeparator() : ""));
+            builder.append(getTaskManagementRepository().getPeople().indexOf(person) + 1).append(". ").append(person.getName())
+                    .append((getTaskManagementRepository().getPeople().indexOf(person) + 1 < getTaskManagementRepository().getPeople().size()) ? System.lineSeparator() : "");
         }
         return builder.toString();
     }
