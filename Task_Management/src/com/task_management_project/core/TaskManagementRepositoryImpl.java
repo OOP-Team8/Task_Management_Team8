@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class TaskManagementRepositoryImpl implements TaskManagementRepository {
-    private int nextId;
+    private static int nextId;
     private List<Person> people;
     private List<Task> tasks;
     private List<Board> boards;
@@ -100,7 +100,7 @@ public class TaskManagementRepositoryImpl implements TaskManagementRepository {
     public Person createPerson(String name) {
         Validation.validateDubs(people, name);
         Person person = new PersonImpl(name);
-        people.add(person);
+        //people.add(person);
         return person;
     }
 
@@ -128,7 +128,7 @@ public class TaskManagementRepositoryImpl implements TaskManagementRepository {
     public Team createTeam(String name) {
         Validation.validateDubs(teams, name);
         Team team = new TeamImpl(name);
-        teams.add(team);
+        //teams.add(team);
         return team;
     }
 
@@ -146,7 +146,7 @@ public class TaskManagementRepositoryImpl implements TaskManagementRepository {
     public Bug createBug(String title, String description, Priority priority, BugStatus bugStatus, BugSeverity bugSeverity, Person person) {
         Bug bug = new BugImpl(++nextId, title, description, priority, bugStatus, bugSeverity, person);
         bugs.add(bug);
-        //tasks.add(bug);
+        tasks.add(bug);
         return bug;
     }
 
@@ -154,13 +154,14 @@ public class TaskManagementRepositoryImpl implements TaskManagementRepository {
     public Feedback createFeedback(String title, String description, FeedbackStatus status, int rating) {
         Feedback feedback = new FeedbackImpl(++nextId, title, description, status, rating);
         feedbacks.add(feedback);
-        //tasks.add(feedback);
+        tasks.add(feedback);
         return feedback;
     }
 
     @Override
     public Story createStory(String title, String description, Priority priority, StoryStatus storyStatus, Size size, Person person) {
         Story story = new StoryImpl(++nextId, title, description, priority, storyStatus, size, person);
+        stories.add(story);
         tasks.add(story);
         return story;
     }
@@ -172,6 +173,7 @@ public class TaskManagementRepositoryImpl implements TaskManagementRepository {
 
     @Override
     public void addTaskToBoard(Task task, Board board) {
+        //findBoardByName(board).addTask(task);
         board.addTask(task);
     }
 
