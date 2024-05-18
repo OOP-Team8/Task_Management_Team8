@@ -7,6 +7,7 @@ public interface Task extends Printable,Identifiable{
 
     String getTitle();
     String getDescription();
+
     List<Comment> getCommentList();
     List<EventLog> getChangesList();
 

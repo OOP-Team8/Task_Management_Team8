@@ -20,6 +20,7 @@ public class PersonImpl implements Person {
         history.add(new EventLogImpl(String.format("New employee was appointed - %s",this.name)));
     }
 
+    @Override
     public String getName() {
         return this.name;
     }
