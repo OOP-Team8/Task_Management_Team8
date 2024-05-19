@@ -12,14 +12,14 @@ import java.util.List;
 public class PersonImpl implements Person {
 
     private String name;
-    private List<Task> tasks;
-    private List<EventLog> history;
+    private final List<Task> tasks;
+    private final List<EventLog> history;
 
     public PersonImpl(String name) {
         setName(name);
-        tasks = new ArrayList<>();
         history = new ArrayList<>();
-        history.add(new EventLogImpl(String.format("New employee was appointed - %s",this.name)));
+        tasks = new ArrayList<>();
+
     }
 
     @Override
