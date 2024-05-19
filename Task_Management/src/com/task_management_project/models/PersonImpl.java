@@ -12,12 +12,14 @@ import java.util.List;
 public class PersonImpl implements Person {
 
     private String name;
-    private List<Task> tasks = new ArrayList<>();
-    private List<EventLog> history = new ArrayList<>();
+    private final List<Task> tasks;
+    private final List<EventLog> history;
 
     public PersonImpl(String name) {
         setName(name);
-        history.add(new EventLogImpl(String.format("New employee was appointed - %s",this.name)));
+        history = new ArrayList<>();
+        tasks = new ArrayList<>();
+
     }
 
     @Override
@@ -40,6 +42,6 @@ public class PersonImpl implements Person {
 
     @Override
     public void addTask(Task task) {
-
+        tasks.add(task);
     }
 }
