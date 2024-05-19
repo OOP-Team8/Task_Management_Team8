@@ -6,21 +6,24 @@ public enum FeedbackStatus {
     SCHEDULED,
     DONE;
 
-    private FeedbackStatus() {
-    }
-
+    @Override
     public String toString() {
-        switch (this.ordinal()) {
-            case 0:
+        switch (this) {
+            case NEW -> {
                 return "New";
-            case 1:
-                return "Ready";
-            case 2:
+            }
+            case UNSCHEDULED -> {
+                return "Unscheduled";
+            }
+            case SCHEDULED -> {
                 return "Scheduled";
-            case 3:
+            }
+            case DONE -> {
                 return "Done";
-            default:
+            }
+            default -> {
                 return "";
+            }
         }
     }
 }

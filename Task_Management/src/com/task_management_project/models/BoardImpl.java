@@ -9,7 +9,7 @@ import com.task_management_project.utils.contracts.DataValidation;
 import java.util.ArrayList;
 import java.util.List;
 
-public class BoardImpl implements Board {
+public class BoardImpl implements Board{
     private String name;
     private final List<Task> boardTasks;
     private final List<EventLog> eventLogList;

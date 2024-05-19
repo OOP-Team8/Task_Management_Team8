@@ -132,14 +132,12 @@ public class TaskManagementRepositoryImpl implements TaskManagementRepository {
 
     @Override
     public Team findTeamByName(String name) {
-        Team team = teams.stream().filter(t -> t.getName().equals(name)).findFirst().orElseThrow(() -> new IllegalArgumentException("This team doesn't exist!"));
-        return team;
+        return teams.stream().filter(t -> t.getName().equals(name)).findFirst().orElseThrow(() -> new IllegalArgumentException("This team doesn't exist!"));
     }
 
     @Override
     public Board findBoardByName(String name) {
-        Board board = boards.stream().filter(t -> t.getName().equals(name)).findFirst().orElseThrow(() -> new IllegalArgumentException("This board doesn't exist!"));
-        return board;
+        return boards.stream().filter(b -> b.getName().equals(name)).findFirst().orElseThrow(() -> new IllegalArgumentException("This board doesn't exist!"));
     }
 
     @Override
@@ -151,8 +149,8 @@ public class TaskManagementRepositoryImpl implements TaskManagementRepository {
     }
 
     @Override
-    public Feedback createFeedback(String title, String description, FeedbackStatus status, int rating) {
-        Feedback feedback = new FeedbackImpl(++nextId, title, description, status, rating);
+    public Feedback createFeedback(String title, String description, FeedbackStatus status, int rating, Person person) {
+        Feedback feedback = new FeedbackImpl(++nextId, title, description, status, rating, person);
         feedbacks.add(feedback);
         tasks.add(feedback);
         return feedback;
@@ -175,11 +173,37 @@ public class TaskManagementRepositoryImpl implements TaskManagementRepository {
 
     @Override
     public void addTaskToBoard(Task task, Board board) {
-        board.addTask(task);
+        findBoardByName(board.getName()).addTask(task);
+
     }
 
     @Override
     public void addTaskToMember(Task task, Person member) {
         member.addTask(task);
     }
+
+    @Override
+    public void changeBugPriority(Task task, Priority priority) {
+        tasks.remove(task);
+        if (task instanceof Bug){
+            task = new BugImpl(task.getId(),task.getTitle(),task.getDescription(),priority,((Bug) task).getStatus(),((Bug) task).getSeverity(),((Bug) task).getPerson());
+            tasks.add(task);
+        }
+        else {
+            throw new IllegalArgumentException("This task is not a Bug.");
+        }
+    }
+
+    @Override
+    public void changeStoryPriority(Task task, Priority priority) {
+        tasks.remove(task);
+        if (task instanceof Story){
+            task = new StoryImpl(task.getId(), task.getTitle(), task.getDescription(),priority,((Story) task).getStatus(), ((Story) task).getSize(),((Story) task).getPerson());
+            tasks.add(task);
+        }
+        else {
+            throw new IllegalArgumentException("This task is not a Story.");
+        }
+    }
+
 }

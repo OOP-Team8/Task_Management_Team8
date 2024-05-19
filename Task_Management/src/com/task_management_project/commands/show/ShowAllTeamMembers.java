@@ -10,7 +10,7 @@ import com.task_management_project.utils.Validation;
 import java.util.List;
 
 public class ShowAllTeamMembers extends BaseCommand {
-    public final int EXPECTED_PARAMS = 0;
+    public final int EXPECTED_PARAMS = 1;
 
     public ShowAllTeamMembers(TaskManagementRepository taskManagementRepository) {
         super(taskManagementRepository);
@@ -20,12 +20,10 @@ public class ShowAllTeamMembers extends BaseCommand {
     protected String executeCommand(List<String> parameters) {
         Validation.validateArgumentsCount(parameters, EXPECTED_PARAMS);
         StringBuilder builder = new StringBuilder("--TEAM-MEMBERS--" + System.lineSeparator());
-        for (Team team : getTaskManagementRepository().getTeams()) {
-            builder.append(String.format("--%s--", team.getName())).append(System.lineSeparator());
-            for (int i = 0; i < team.getMembers().size(); i++) {
-                builder.append(i + 1).append(". ").append(team.getMembers().get(i).getName()).append(
-                        ((team.getMembers().indexOf(team.getMembers().get(i))+1 < team.getMembers().size() || getTaskManagementRepository().getTeams().indexOf(team)+1 < getTaskManagementRepository().getTeams().size()) ? System.lineSeparator() : ""));
-            }
+        Team team = getTaskManagementRepository().findTeamByName(parameters.get(0));
+        for (int i = 0; i < team.getMembers().size(); i++) {
+            builder.append(i + 1).append(". ").append(team.getMembers().get(i).getName()).append(
+                    ((team.getMembers().indexOf(team.getMembers().get(i))+1 < team.getMembers().size() || getTaskManagementRepository().getTeams().indexOf(team)+1 < getTaskManagementRepository().getTeams().size()) ? System.lineSeparator() : ""));
         }
         return builder.toString();
     }

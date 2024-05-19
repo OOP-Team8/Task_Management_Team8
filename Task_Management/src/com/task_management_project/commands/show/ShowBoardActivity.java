@@ -2,7 +2,7 @@ package com.task_management_project.commands.show;
 
 import com.task_management_project.commands.BaseCommand;
 import com.task_management_project.core.contracts.TaskManagementRepository;
-import com.task_management_project.models.contracts.Board;import com.task_management_project.models.contracts.EventLog;
+import com.task_management_project.models.contracts.Board;
 import com.task_management_project.models.contracts.Team;
 import com.task_management_project.utils.Validation;
 
@@ -20,7 +20,7 @@ public class ShowBoardActivity extends BaseCommand {
         Board board = getTaskManagementRepository().findBoardByName(parameters.get(0));
         Team team = getTaskManagementRepository().findTeamByName(parameters.get(1));
         StringBuilder builder = new StringBuilder(String.format("--%s - %s--",team.getName(),board.getName())).append(System.lineSeparator());
-        Validation.message(builder, board,board.getLogs());
+        Validation.message(builder,board,board.getTasks());
         return builder.toString();
     }
 }

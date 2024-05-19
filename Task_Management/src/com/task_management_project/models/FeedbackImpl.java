@@ -1,9 +1,6 @@
 package com.task_management_project.models;
 
-import com.task_management_project.models.contracts.Comment;
-import com.task_management_project.models.contracts.EventLog;
-import com.task_management_project.models.contracts.Feedback;
-import com.task_management_project.models.contracts.Task;
+import com.task_management_project.models.contracts.*;
 import com.task_management_project.models.enums.FeedbackStatus;
 import com.task_management_project.utils.Validation;
 
@@ -13,8 +10,8 @@ public class FeedbackImpl extends TaskImpl implements Feedback {
     private FeedbackStatus status;
     private int rating;
 
-    public FeedbackImpl(int id, String title, String description, FeedbackStatus status, int rating) {
-        super(id, title, description);
+    public FeedbackImpl(int id, String title, String description, FeedbackStatus status, int rating, Person person) {
+        super(id, title, description,person);
         this.status = status;
         setRating(rating);
         this.eventList.add(new EventLogImpl("It was created a new feedback!"));

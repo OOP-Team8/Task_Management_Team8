@@ -15,15 +15,15 @@ public class BugImpl extends TaskImpl implements Bug {
     private BugSeverity bugSeverity;
     private BugStatus bugStatus;
     private List<String> steps;
-    private Person person;
 
     public BugImpl(int id, String title, String description, Priority priority, BugStatus bugStatus, BugSeverity bugSeverity,Person person) {
-        super(id, title, description);
+        super(id, title, description,person);
         setPriority(priority);
         setBugSeverity(bugSeverity);
         setBugStatus(bugStatus);
         steps = new ArrayList<>();
         this.person = person;
+        eventList.add(new EventLogImpl(String.format("New bug was initialized with name - %s",getTitle())));
     }
 
     @Override
@@ -42,10 +42,6 @@ public class BugImpl extends TaskImpl implements Bug {
     @Override
     public List<String> getSteps() {
         return new ArrayList<>(steps);
-    }
-    @Override
-    public Person getPerson() {
-        return person;
     }
 
     private void setPriority(Priority priority) {

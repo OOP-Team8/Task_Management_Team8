@@ -2,6 +2,7 @@ package com.task_management_project.models;
 
 import com.task_management_project.models.contracts.Comment;
 import com.task_management_project.models.contracts.EventLog;
+import com.task_management_project.models.contracts.Person;
 import com.task_management_project.models.contracts.Task;
 import com.task_management_project.utils.contracts.DataValidation;
 import com.task_management_project.utils.Validation;
@@ -16,11 +17,18 @@ public abstract class TaskImpl implements Task {
     private String description;
     protected List<Comment> comments = new ArrayList();
     protected List<EventLog> eventList = new ArrayList();
+    Person person;
 
-    public TaskImpl(int id, String title, String description) {
+    public TaskImpl(int id, String title, String description, Person person) {
         this.id = id;
-        this.setTitle(title);
-        this.setDescription(description);
+        setTitle(title);
+        setDescription(description);
+        this.person = person;
+    }
+
+    @Override
+    public Person getPerson() {
+        return this.person;
     }
 
     public int getId() {

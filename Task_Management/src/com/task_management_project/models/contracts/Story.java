@@ -8,5 +8,4 @@ public interface Story extends Task,Identifiable{
     Priority getPriority();
     StoryStatus getStatus();
     Size getSize();
-    Person getPerson();
 }

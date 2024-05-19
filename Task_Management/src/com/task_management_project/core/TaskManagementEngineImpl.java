@@ -5,17 +5,14 @@ import com.task_management_project.core.contracts.CommandFactory;
 import com.task_management_project.core.contracts.TaskManagementEngine;
 import com.task_management_project.core.contracts.TaskManagementRepository;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
 
 public class TaskManagementEngineImpl implements TaskManagementEngine {
     private static final String TERMINATION_COMMAND = "Exit";
     private static final String EMPTY_COMMAND_ERROR = "Command cannot be empty.";
     private static final String MAIN_SPLIT_SYMBOL = " ";
-    private static final String COMMENT_OPEN_SYMBOL = "{{";
-    private static final String COMMENT_CLOSE_SYMBOL = "}}";
+    private static final String COMMENT_OPEN_SYMBOL = "{";
+    private static final String COMMENT_CLOSE_SYMBOL = "}";
     private static final String REPORT_SEPARATOR = "####################";
 
     private final CommandFactory commandFactory;
@@ -90,18 +87,26 @@ public class TaskManagementEngineImpl implements TaskManagementEngine {
     }
 
     public List<String> extractCommentParameters(String fullCommand) {
-        int indexOfFirstSeparator = fullCommand.indexOf(MAIN_SPLIT_SYMBOL);
+        //int indexOfFirstSeparator = fullCommand.indexOf(MAIN_SPLIT_SYMBOL);
         int indexOfOpenComment = fullCommand.indexOf(COMMENT_OPEN_SYMBOL);
-        int indexOfCloseComment = fullCommand.indexOf(COMMENT_CLOSE_SYMBOL);
+        String[] commandParts = fullCommand.split(" ");
+        //int indexOfCloseComment = fullCommand.indexOf(COMMENT_CLOSE_SYMBOL);
         List<String> parameters = new ArrayList<>();
-        if (indexOfOpenComment >= 0) {
-            parameters.add(fullCommand.substring(indexOfOpenComment + COMMENT_OPEN_SYMBOL.length(), indexOfCloseComment));
-            fullCommand = fullCommand.replaceAll("\\{\\{.+(?=}})}}", "");
+        for (int i = 1; i < fullCommand.length() - 1 ; i++) {
+            if (commandParts[i].contains(COMMENT_OPEN_SYMBOL)){
+                //fullCommand = fullCommand.replaceAll("\\{.+(?=}})", "");
+                StringBuilder builder = new StringBuilder();
+                for (int j = 5; j < commandParts.length; j++) {
+                    commandParts[j] = commandParts[j].replaceAll("[{}]",""); // change!
+                    builder.append(commandParts[j]).append((Arrays.asList(commandParts).indexOf(commandParts[j]) < commandParts.length - 1) ? " " : "");
+                }
+                parameters.add(builder.toString());
+                break;
+            }
+            else {
+                parameters.add(commandParts[i]);
+            }
         }
-
-        List<String> result = new ArrayList<>(Arrays.asList(fullCommand.substring(indexOfFirstSeparator + 1).split(MAIN_SPLIT_SYMBOL)));
-        result.removeAll(Arrays.asList(" ", "", null));
-        parameters.addAll(result);
         return parameters;
     }
 
