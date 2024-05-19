@@ -11,16 +11,16 @@ public class FeedbackImpl extends TaskImpl implements Feedback {
     private int rating;
 
     public FeedbackImpl(int id, String title, String description, FeedbackStatus status, int rating, Person person) {
-        super(id, title, description,person);
+        super(id, title, description, person);
         this.status = status;
         setRating(rating);
         this.eventList.add(new EventLogImpl("It was created a new feedback!"));
     }
-
     @Override
     public int getRating() {
         return this.rating;
     }
+
     @Override
     public FeedbackStatus getStatus() {
         return this.status;
@@ -28,7 +28,7 @@ public class FeedbackImpl extends TaskImpl implements Feedback {
 
     private void setRating(int rating) {
         Validation.validateIntPositiveValue(rating, "The value should be positive");
-        if (this.rating != 0){
+        if (this.rating != 0) {
             this.eventList.add(new EventLogImpl(String.format("The rating was changed to %d", rating)));
         }
         this.rating = rating;

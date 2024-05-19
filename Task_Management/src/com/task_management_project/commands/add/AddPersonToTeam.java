@@ -19,7 +19,9 @@ public class AddPersonToTeam extends BaseCommand {
         Validation.validateArgumentsCount(parameters,EXPECTED_PARAMS);
         Person person = getTaskManagementRepository().findPersonByName(parameters.get(0));
         Team team = getTaskManagementRepository().findTeamByName(parameters.get(1));
+
         team.addMember(person);
+
         return String.format("%s was added to the team", person.getName());
     }
 }
