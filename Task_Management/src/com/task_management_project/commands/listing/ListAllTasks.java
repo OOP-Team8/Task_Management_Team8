@@ -7,6 +7,7 @@ import com.task_management_project.models.contracts.Task;
 import com.task_management_project.utils.ListingHelpers;
 import com.task_management_project.utils.Validation;
 
+import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -24,6 +25,7 @@ public class ListAllTasks extends BaseCommand {
     @Override
     protected String executeCommand(List<String> parameters) {
         List<Task> tasks = getTaskManagementRepository().getTasks();
+
         Validation.validateArgumentsCount(parameters,PARAMETER);
 
         title = parameters.get(0);
@@ -32,19 +34,15 @@ public class ListAllTasks extends BaseCommand {
     }
 
     public String findTasks(String title,List<Task> list){
-
         if (list.isEmpty()) {
             return "No tasks found with the specified title. Please try a different one.";
-        }else {
-            if(list.size() > 1){
-            list = list.stream()
-                    .filter(task -> task.getTitle() == title)
-                    .collect(Collectors.toList());
-
-
-            list.sort(Comparator.comparing(Task::getTitle));
-            }
-            return ListingHelpers.listElements(list);
         }
+        list = list.stream()
+                .filter(task -> task.getTitle().equalsIgnoreCase(title))
+                .collect(Collectors.toList());
+
+        list.sort(Comparator.comparing(Task::getTitle));
+
+        return ListingHelpers.listElements(list);
     }
 }

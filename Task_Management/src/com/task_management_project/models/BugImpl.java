@@ -56,6 +56,6 @@ public class BugImpl extends TaskImpl implements Bug {
 
     @Override
     public String getAsString() {
-        return String.format("%s\n%s\n%s\n%s",super.getAsString(),getPriority(),getStatus(),getSeverity());
+        return String.format("%s\nPriority: %s\nStatus: %s\nSeverity: %s",super.getAsString(),getPriority(),getStatus(),getSeverity());
     }
 }
