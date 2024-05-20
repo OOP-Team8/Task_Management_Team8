@@ -70,12 +70,8 @@ public class ListAllBugs extends BaseCommand {
             }
         }
 
-        StringBuilder result = new StringBuilder();
-        for (Bug bug : list) {
-            result.append(bug.getAsString()).append(System.lineSeparator());
-        }
 
-        return result.toString().trim();
+        return ListingHelpers.listElements(list);
     }
 
 

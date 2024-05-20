@@ -4,6 +4,7 @@ import com.task_management_project.commands.BaseCommand;
 import com.task_management_project.core.contracts.TaskManagementRepository;
 import com.task_management_project.models.contracts.Story;
 import com.task_management_project.models.contracts.Task;
+import com.task_management_project.utils.ListingHelpers;
 import com.task_management_project.utils.Validation;
 
 import java.util.Comparator;
@@ -37,16 +38,11 @@ public class ListAllTasks extends BaseCommand {
         }
 
         list = list.stream()
-                .filter(story -> story.getTitle() == title)
+                .filter(task -> task.getTitle() == title)
                 .collect(Collectors.toList());
 
         list.sort(Comparator.comparing(Task::getTitle));
 
-        StringBuilder result = new StringBuilder();
-        for (Task task : list) {
-            result.append(task.getAsString()).append(System.lineSeparator());
-        }
-
-        return result.toString().trim();
+        return ListingHelpers.listElements(list);
     }
 }

@@ -6,6 +6,7 @@ import com.task_management_project.models.contracts.Bug;
 import com.task_management_project.models.contracts.Feedback;
 import com.task_management_project.models.enums.BugStatus;
 import com.task_management_project.models.enums.FeedbackStatus;
+import com.task_management_project.utils.ListingHelpers;
 import com.task_management_project.utils.ParsingHelpers;
 
 import java.util.Comparator;
@@ -65,12 +66,8 @@ public class ListAllFeedbacks extends BaseCommand {
             }
         }
 
-        StringBuilder result = new StringBuilder();
-        for (Feedback feedback : list) {
-            result.append(feedback.getAsString()).append(System.lineSeparator());
-        }
 
-        return result.toString().trim();
+        return ListingHelpers.listElements(list);
     }
 
 

@@ -7,6 +7,7 @@ import com.task_management_project.models.contracts.Story;
 import com.task_management_project.models.enums.BugStatus;
 import com.task_management_project.models.enums.FeedbackStatus;
 import com.task_management_project.models.enums.StoryStatus;
+import com.task_management_project.utils.ListingHelpers;
 import com.task_management_project.utils.ParsingHelpers;
 
 import java.util.Comparator;
@@ -66,12 +67,7 @@ public class ListAllStories extends BaseCommand {
             }
         }
 
-        StringBuilder result = new StringBuilder();
-        for (Story story : list) {
-            result.append(story.getAsString()).append(System.lineSeparator());
-        }
-
-        return result.toString().trim();
+        return ListingHelpers.listElements(list);
     }
 
 

@@ -17,8 +17,6 @@ public abstract class TaskImpl implements Task {
     protected List<Comment> comments;
     protected List<EventLog> eventList;
     private final Person person;
-    private Person assignee;
-
 
     public TaskImpl(int id, String title, String description, Person person) {
         this.id = id;
