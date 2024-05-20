@@ -199,16 +199,20 @@ public class TaskManagementRepositoryImpl implements TaskManagementRepository {
     public void changeBugPriority(Bug bug, Priority priority) {
         TaskManagementRepositoryImpl.findById(bug.getId(), bugs);
         bugs.remove(bug);
+        tasks.remove(bug);
         Bug bugItem = new BugImpl(bug.getId(),bug.getTitle(),bug.getDescription(),priority,bug.getStatus(),bug.getSeverity(),bug.getPerson());
         bugs.add(bugItem);
+        tasks.add(bugItem);
     }
 
     @Override
     public void changeStoryPriority(Story story, Priority priority) {
         TaskManagementRepositoryImpl.findById(story.getId(), stories);
         stories.remove(story);
+        tasks.remove(story);
         Story storyItem = new StoryImpl(story.getId(),story.getTitle(),story.getDescription(),priority,story.getStatus(),story.getSize(),story.getPerson());
         stories.add(storyItem);
+        tasks.add(storyItem);
     }
 
     @Override
