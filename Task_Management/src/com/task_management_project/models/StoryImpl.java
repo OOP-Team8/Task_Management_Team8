@@ -44,9 +44,6 @@ public class  StoryImpl extends TaskImpl implements Story {
         this.size = size;
     }
 
-
-
-    //TODO
     @Override
     public String getAsString() {
        return String.format("%s\n%s\n%s\n%s",super.getAsString(),getPriority(),getStatus(),getSize());

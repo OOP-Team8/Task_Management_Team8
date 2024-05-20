@@ -27,7 +27,6 @@ public abstract class TaskImpl implements Task {
         comments = new ArrayList();
         eventList = new ArrayList();
         this.person = person;
-        this.assignee = assignee;
     }
 
     @Override
