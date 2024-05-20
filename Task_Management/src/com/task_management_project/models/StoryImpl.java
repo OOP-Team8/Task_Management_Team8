@@ -13,10 +13,11 @@ public class  StoryImpl extends TaskImpl implements Story {
     private Size size;
 
     public StoryImpl(int id, String title, String description, Priority priority, StoryStatus status, Size size, Person person) {
-        super(id, title, description, person, TaskType.STORY);
+        super(id, title, description, person);
         setPriority(priority);
         setStatus(status);
         setSize(size);
+        this.type = TaskType.STORY;
     }
     @Override
     public Priority getPriority() {

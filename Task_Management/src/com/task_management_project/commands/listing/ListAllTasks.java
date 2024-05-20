@@ -34,15 +34,17 @@ public class ListAllTasks extends BaseCommand {
     public String findTasks(String title,List<Task> list){
 
         if (list.isEmpty()) {
-            return "No tasks found with the specified criteria.";
+            return "No tasks found with the specified title. Please try a different one.";
+        }else {
+            if(list.size() > 1){
+            list = list.stream()
+                    .filter(task -> task.getTitle() == title)
+                    .collect(Collectors.toList());
+
+
+            list.sort(Comparator.comparing(Task::getTitle));
+            }
+            return ListingHelpers.listElements(list);
         }
-
-        list = list.stream()
-                .filter(task -> task.getTitle() == title)
-                .collect(Collectors.toList());
-
-        list.sort(Comparator.comparing(Task::getTitle));
-
-        return ListingHelpers.listElements(list);
     }
 }

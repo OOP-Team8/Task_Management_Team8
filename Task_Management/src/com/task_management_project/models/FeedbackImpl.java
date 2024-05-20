@@ -12,8 +12,9 @@ public class FeedbackImpl extends TaskImpl implements Feedback {
     private int rating;
 
     public FeedbackImpl(int id, String title, String description, FeedbackStatus status, int rating, Person person) {
-        super(id, title, description, person, TaskType.FEEDBACK);
+        super(id, title, description, person);
         this.status = status;
+        this.type = TaskType.FEEDBACK;
         setRating(rating);
         this.eventList.add(new EventLogImpl("It was created a new feedback!"));
     }

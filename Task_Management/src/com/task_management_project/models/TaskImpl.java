@@ -18,9 +18,9 @@ public abstract class TaskImpl implements Task {
     protected List<Comment> comments;
     protected List<EventLog> eventList;
     private final Person person;
-    private TaskType type;
+    protected TaskType type;
 
-    public TaskImpl(int id, String title, String description, Person person, TaskType type) {
+    public TaskImpl(int id, String title, String description, Person person) {
         this.id = id;
         setTitle(title);
         setDescription(description);
@@ -44,6 +44,10 @@ public abstract class TaskImpl implements Task {
     @Override
     public String getDescription() {
         return description;
+    }
+    @Override
+    public TaskType getType(){
+        return type;
     }
     @Override
     public List<Comment> getCommentList() {
@@ -75,6 +79,6 @@ public abstract class TaskImpl implements Task {
 
     @Override
     public String getAsString() {
-        return String.format("%d\n%s\n%s\n%s",getId(),getTitle(),getDescription(),getPerson().getAsString());
+        return String.format("%d\n%s\n%s\n%s\n%s",getId(),getTitle(),getDescription(),getPerson().getAsString(),getType());
     }
 }

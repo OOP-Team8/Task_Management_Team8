@@ -18,10 +18,11 @@ public class BugImpl extends TaskImpl implements Bug {
     private List<String> steps;
 
     public BugImpl(int id, String title, String description, Priority priority, BugStatus bugStatus, BugSeverity bugSeverity,Person person) {
-        super(id, title, description,person, TaskType.BUG);
+        super(id, title, description,person);
         setPriority(priority);
         setBugSeverity(bugSeverity);
         setBugStatus(bugStatus);
+        this.type = TaskType.BUG;
         steps = new ArrayList<>();
         eventList.add(new EventLogImpl(String.format("New bug was initialized with name - %s",getTitle())));
     }
