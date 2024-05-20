@@ -2,10 +2,16 @@ package com.task_management_project.commands.assignAndUnassign;
 
 import com.task_management_project.commands.BaseCommand;
 import com.task_management_project.core.contracts.TaskManagementRepository;
+import com.task_management_project.models.contracts.Person;
+import com.task_management_project.models.contracts.Task;
+import com.task_management_project.utils.ParsingHelpers;
+import com.task_management_project.utils.Validation;
 
 import java.util.List;
 
 public class UnassignTaskToPerson extends BaseCommand {
+    public final int EXPECTED_PARAMS = 2;
+    private final String ERROR_MESSAGE = "Wrong Id";
 
     public UnassignTaskToPerson(TaskManagementRepository taskManagementRepository) {
         super(taskManagementRepository);
@@ -13,26 +19,13 @@ public class UnassignTaskToPerson extends BaseCommand {
 
     @Override
     protected String executeCommand(List<String> parameters) {
-//        if (parameters.size() < 2) {
-//            return "Insufficient parameters. Please provide the team name and the board name.";
-//        }
-//
-//        String teamName = parameters.get(0);
-//        String boardName = parameters.get(1);
-//
-//        if (!taskManagementRepository.teamExists(teamName)) {
-//            return "Team with the provided name does not exist.";
-//        }
-//
-//        Team team = taskManagementRepository.getTeamByName(teamName);
-//        if (team.boardExists(boardName)) {
-//            return "Board with the provided name already exists in the team.";
-//        }
-//
-//        Board newBoard = new Board(boardName);
-//        team.addBoard(newBoard);
-//
-//        return String.format("Board '%s' successfully created in team '%s'.", boardName, teamName);
-        return null;
+        Validation.validateArgumentsCount(parameters, EXPECTED_PARAMS);
+        Task task = getTaskManagementRepository().findTaskById(ParsingHelpers.tryParseInt(parameters.get(0),ERROR_MESSAGE));
+        Person person1 = task.getPerson();
+        Person person2 = getTaskManagementRepository().findPersonByName(parameters.get(1));
+
+        getTaskManagementRepository().removeTaskFromPerson(task, person2);
+
+        return String.format("%s completed his task with name - %s",person2.getName(),task.getTitle());
     }
 }

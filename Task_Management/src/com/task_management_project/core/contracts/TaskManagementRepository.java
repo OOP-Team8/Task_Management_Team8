@@ -35,7 +35,7 @@ public interface TaskManagementRepository {
 
     Bug createBug(String title, String description, Priority priority, BugStatus bugStatus, BugSeverity bugSeverity,Person person);
 
-    Feedback createFeedback(String title, String description, FeedbackStatus status, int rating);
+    Feedback createFeedback(String title, String description, FeedbackStatus status, int rating, Person person);
 
     Story createStory(String title, String description, Priority priority, StoryStatus storyStatus, Size size, Person person);
 
@@ -44,4 +44,8 @@ public interface TaskManagementRepository {
     void addTaskToBoard(Task task, Board board);
 
     void addTaskToMember(Task task, Person member);
+
+    void changeBugPriority(Bug bug, Priority priority);
+    void changeStoryPriority(Story story, Priority priority);
+    void removeTaskFromPerson(Task task, Person assignee);
 }

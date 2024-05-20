@@ -19,7 +19,7 @@ public class ShowPersonActivity extends BaseCommand {
         Validation.validateArgumentsCount(parameters,EXPECTED_PARAMS);
         Person person = getTaskManagementRepository().findPersonByName(parameters.get(0));
         StringBuilder builder = new StringBuilder(String.format("--%s - ACTIVITIES--",person.getName())).append(System.lineSeparator());
-        Validation.message(builder, person,person.getLogs());
+        Validation.message(builder, person,person.getTasks());
         return builder.toString();
     }
 }

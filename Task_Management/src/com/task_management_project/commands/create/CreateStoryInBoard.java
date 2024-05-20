@@ -27,8 +27,8 @@ public class CreateStoryInBoard extends BaseCommand {
 
         String title = parameters.get(0);
         String description = parameters.get(1);
-        StoryStatus storyStatus = ParsingHelpers.tryParseEnum(parameters.get(2),StoryStatus.class);
-        Priority priority = ParsingHelpers.tryParseEnum(parameters.get(3),Priority.class);
+        Priority priority = ParsingHelpers.tryParseEnum(parameters.get(2),Priority.class);
+        StoryStatus storyStatus = ParsingHelpers.tryParseEnum(parameters.get(3),StoryStatus.class);
         Size size = ParsingHelpers.tryParseEnum(parameters.get(4),Size.class);
         Person person = getTaskManagementRepository().findPersonByName(parameters.get(5));
         String boardName = parameters.get(6);
@@ -41,7 +41,7 @@ public class CreateStoryInBoard extends BaseCommand {
         Story story = getTaskManagementRepository().createStory(title,description,priority,storyStatus,size,person);
         Board board = getTaskManagementRepository().findBoardByName(boardName);
         getTaskManagementRepository().addTaskToBoard(story,board);
-        getTaskManagementRepository().addTaskToMember(story, person);
+        //getTaskManagementRepository().addTaskToMember(story, person);
 
         return String.format(STORY_ADDED_SUCCESSFULLY,title,boardName);
     }

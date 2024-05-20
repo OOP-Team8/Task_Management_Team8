@@ -2,7 +2,7 @@ package com.task_management_project.models.contracts;
 
 import java.util.List;
 
-public interface Team extends Nameable {
+public interface Team extends Nameable, Printable{
 
     List<Person> getMembers();
 

@@ -26,16 +26,15 @@ public class Validation implements DataValidation {
         }
     }
     public static <T extends Nameable> void validateDubs(List<T> list, String name){
-
         for (T item : list) {
             if (item.getName().equals(name)){
                 throw new IllegalArgumentException(NOT_UNIQUE_NAME);
             }
         }
     }
-    public static <T extends Loggable> StringBuilder message(StringBuilder builder, T value, List<EventLog> list){
-        for (EventLog item : list) {
-            builder.append(value.getLogs().indexOf(item) +1).append(". ").append(value.getLogs()).append(value.getLogs().indexOf(item) + 1 < value.getLogs().size() ? System.lineSeparator() : "");
+    public static <T extends Taskable> StringBuilder message(StringBuilder builder, T value, List<Task> list){
+        for (Task item : list) {
+            builder.append(value.getTasks().indexOf(item) +1).append(". ID - ").append(item.getId()).append(" ").append(item.getTitle()).append(" ").append(item.getPerson().getName()).append(" - ").append(item.getClass().getInterfaces()[0].getSimpleName()).append(value.getTasks().indexOf(item) + 1 < value.getTasks().size() ? System.lineSeparator() : "");
         }
         return builder;
     }

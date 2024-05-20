@@ -6,20 +6,17 @@ import com.task_management_project.models.enums.Priority;
 import com.task_management_project.models.enums.Size;
 import com.task_management_project.models.enums.StoryStatus;
 
-public class StoryImpl extends TaskImpl implements Story {
+public class  StoryImpl extends TaskImpl implements Story {
     private Priority priority;
     private StoryStatus status;
     private Size size;
-    private Person person;
 
     public StoryImpl(int id, String title, String description, Priority priority, StoryStatus status, Size size, Person person) {
-        super(id, title, description);
+        super(id, title, description, person);
         setPriority(priority);
         setStatus(status);
         setSize(size);
-        this.person = person;
     }
-
     @Override
     public Priority getPriority() {
         return this.priority;
@@ -47,10 +44,7 @@ public class StoryImpl extends TaskImpl implements Story {
         this.size = size;
     }
 
-    @Override
-    public Person getPerson() {
-        return this.person;
-    }
+
 
     //TODO
     @Override

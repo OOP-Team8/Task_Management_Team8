@@ -7,6 +7,8 @@ import com.task_management_project.models.enums.*;
 import com.task_management_project.utils.Validation;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 public class TaskManagementRepositoryImpl implements TaskManagementRepository {
@@ -132,16 +134,17 @@ public class TaskManagementRepositoryImpl implements TaskManagementRepository {
 
     @Override
     public Team findTeamByName(String name) {
-        Team team = teams.stream().filter(t -> t.getName().equals(name)).findFirst().orElseThrow(() -> new IllegalArgumentException("This team doesn't exist!"));
-        return team;
+        return teams.stream().filter(t -> t.getName().equals(name)).findFirst().orElseThrow(() -> new IllegalArgumentException("This team doesn't exist!"));
     }
 
     @Override
     public Board findBoardByName(String name) {
-        Board board = boards.stream().filter(t -> t.getName().equals(name)).findFirst().orElseThrow(() -> new IllegalArgumentException("This board doesn't exist!"));
-        return board;
+        return boards.stream().filter(b -> b.getName().equals(name)).findFirst().orElseThrow(() -> new IllegalArgumentException("This board doesn't exist!"));
     }
 
+    public static  <T extends Task> T findById(int id, List<T> list){
+        return list.stream().filter(t -> t.getId() == id).findFirst().orElseThrow(() -> new IllegalArgumentException("This task doesn't exist!"));
+    }
     @Override
     public Bug createBug(String title, String description, Priority priority, BugStatus bugStatus, BugSeverity bugSeverity, Person person) {
         Bug bug = new BugImpl(++nextId, title, description, priority, bugStatus, bugSeverity, person);
@@ -151,8 +154,8 @@ public class TaskManagementRepositoryImpl implements TaskManagementRepository {
     }
 
     @Override
-    public Feedback createFeedback(String title, String description, FeedbackStatus status, int rating) {
-        Feedback feedback = new FeedbackImpl(++nextId, title, description, status, rating);
+    public Feedback createFeedback(String title, String description, FeedbackStatus status, int rating, Person person) {
+        Feedback feedback = new FeedbackImpl(++nextId, title, description, status, rating, person);
         feedbacks.add(feedback);
         tasks.add(feedback);
         return feedback;
@@ -175,11 +178,48 @@ public class TaskManagementRepositoryImpl implements TaskManagementRepository {
 
     @Override
     public void addTaskToBoard(Task task, Board board) {
-        board.addTask(task);
+        findBoardByName(board.getName()).addTask(task);
+
     }
 
     @Override
-    public void addTaskToMember(Task task, Person member) {
-        member.addTask(task);
+    public void addTaskToMember(Task task, Person assignee) {
+        if (!people.contains(assignee)){
+            throw new IllegalArgumentException("This person doesn't exist!");
+        }
+        if (!task.getPerson().equals(assignee)){
+            assignee.addEvent(new EventLogImpl(String.format("%s take a new task - %s from %s",assignee.getName(),task.getTitle(),task.getPerson().getName())));
+        }
+
+        task.getPerson().addEvent(new EventLogImpl(String.format("%s take a new task - %s",assignee.getName(),task.getTitle())));
+        assignee.addTask(task);
+    }
+
+    @Override
+    public void changeBugPriority(Bug bug, Priority priority) {
+        TaskManagementRepositoryImpl.findById(bug.getId(), bugs);
+        bugs.remove(bug);
+        Bug bugItem = new BugImpl(bug.getId(),bug.getTitle(),bug.getDescription(),priority,bug.getStatus(),bug.getSeverity(),bug.getPerson());
+        bugs.add(bugItem);
+    }
+
+    @Override
+    public void changeStoryPriority(Story story, Priority priority) {
+        TaskManagementRepositoryImpl.findById(story.getId(), stories);
+        stories.remove(story);
+        Story storyItem = new StoryImpl(story.getId(),story.getTitle(),story.getDescription(),priority,story.getStatus(),story.getSize(),story.getPerson());
+        stories.add(storyItem);
+    }
+
+    @Override
+    public void removeTaskFromPerson(Task task, Person assignee) {
+        TaskManagementRepositoryImpl.findById(task.getId(),assignee.getTasks());
+        if (!people.contains(assignee)){
+            throw new IllegalArgumentException("This person doesn't exist!");
+        }
+        assignee.removeTask(task);
+        Person person = task.getPerson();
+        person.addEvent(new EventLogImpl(String.format("%s completed task - %s", assignee.getName(),task.getTitle())));
+        assignee.addEvent(new EventLogImpl(String.format("The task with name - %s was complete.", task.getTitle())));
     }
 }

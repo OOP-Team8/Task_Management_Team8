@@ -16,7 +16,7 @@ public class ShowAllPeople extends BaseCommand {
 
     @Override
     protected String executeCommand(List<String> parameters) {
-        Validation.validateArgumentsCount(parameters,EXPECTED_PARAMS);
+        Validation.validateArgumentsCount(parameters, EXPECTED_PARAMS);
         StringBuilder builder = new StringBuilder("--EMPLOYEES--" + System.lineSeparator());
         for (Person person : getTaskManagementRepository().getPeople()) {
             builder.append(getTaskManagementRepository().getPeople().indexOf(person) + 1).append(". ").append(person.getName())
