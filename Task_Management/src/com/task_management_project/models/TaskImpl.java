@@ -66,4 +66,9 @@ public abstract class TaskImpl implements Task {
     public List<EventLog> getChangesList() {
         return new ArrayList(eventList);
     }
+
+    @Override
+    public String getAsString() {
+        return String.format("%d\n%s\n%s\n%s",getId(),getTitle(),getDescription(),getPerson().getAsString());
+    }
 }

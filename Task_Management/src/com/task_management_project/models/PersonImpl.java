@@ -44,4 +44,9 @@ public class PersonImpl implements Person {
     public void addTask(Task task) {
         tasks.add(task);
     }
+
+    @Override
+    public String getAsString() {
+        return String.format("%s",getName());
+    }
 }

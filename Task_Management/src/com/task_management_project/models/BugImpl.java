@@ -56,10 +56,8 @@ public class BugImpl extends TaskImpl implements Bug {
         this.bugSeverity = bugSeverity;
     }
 
-
-    //TODO
     @Override
     public String getAsString() {
-        return null;
+        return String.format("%s\n%s\n%s\n%s",super.getAsString(),getPriority(),getStatus(),getSeverity());
     }
 }

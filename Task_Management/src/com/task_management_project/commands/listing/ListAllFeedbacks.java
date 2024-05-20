@@ -3,33 +3,33 @@ package com.task_management_project.commands.listing;
 import com.task_management_project.commands.BaseCommand;
 import com.task_management_project.core.contracts.TaskManagementRepository;
 import com.task_management_project.models.contracts.Bug;
-import com.task_management_project.models.contracts.Story;
+import com.task_management_project.models.contracts.Feedback;
 import com.task_management_project.models.enums.BugStatus;
 import com.task_management_project.models.enums.FeedbackStatus;
-import com.task_management_project.models.enums.StoryStatus;
 import com.task_management_project.utils.ParsingHelpers;
 
 import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class ListAllStories extends BaseCommand {
+public class ListAllFeedbacks extends BaseCommand {
 
-    private StoryStatus status = null;
+    private FeedbackStatus status = null;
     private String personName = null;
     private String sortBy = null;
 
-    public ListAllStories(TaskManagementRepository taskManagementRepository) {
+    public ListAllFeedbacks(TaskManagementRepository taskManagementRepository) {
         super(taskManagementRepository);
     }
 
     @Override
     protected String executeCommand(List<String> parameters) {
-        List<Story> stories = getTaskManagementRepository().getStories();
+        List<Feedback> feedbacks = getTaskManagementRepository().getFeedbacks();
 
+        //TODO
         for (String param : parameters) {
             if (checkStatus(param)) {
-                status = ParsingHelpers.tryParseEnum(param, StoryStatus.class);
+                status = ParsingHelpers.tryParseEnum(param,FeedbackStatus.class);
             } else if(checkSortBy(param)) {
                 sortBy = param;
             } else {
@@ -37,10 +37,10 @@ public class ListAllStories extends BaseCommand {
             }
         }
 
-        return findStory(status,personName,sortBy,stories);
+        return findFeedback(status,personName,sortBy,feedbacks);
     }
 
-    public String findStory(StoryStatus status, String personName, String sortBy, List<Story> list){
+    public String findFeedback(FeedbackStatus status, String personName, String sortBy, List<Feedback> list){
 
         if (list.isEmpty()) {
             return "No bugs found with the specified criteria.";
@@ -48,27 +48,26 @@ public class ListAllStories extends BaseCommand {
 
         if(status != null){
             list = list.stream()
-                    .filter(story -> story.getStatus() == status)
+                    .filter(feedback -> feedback.getStatus() == status)
                     .collect(Collectors.toList());
         }
         if (personName != null){
             list = list.stream()
-                    .filter(story -> story.getPerson().getName().equals(personName))
+                    .filter(feedback -> feedback.getPerson().getName().equals(personName))
                     .collect(Collectors.toList());
         }
 
         if (sortBy != null) {
             switch (sortBy.toLowerCase()) {
-                case "title" -> list.sort(Comparator.comparing(Story::getTitle));
-                case "priority" -> list.sort(Comparator.comparing(Story::getPriority));
-                case "size" -> list.sort(Comparator.comparing(Story::getSize));
+                case "title" -> list.sort(Comparator.comparing(Feedback::getTitle));
+                case "rating" -> list.sort(Comparator.comparing(Feedback::getRating));
                 default -> throw new IllegalArgumentException("Invalid sort parameter.");
             }
         }
 
         StringBuilder result = new StringBuilder();
-        for (Story story : list) {
-            result.append(story.getAsString()).append(System.lineSeparator());
+        for (Feedback feedback : list) {
+            result.append(feedback.getAsString()).append(System.lineSeparator());
         }
 
         return result.toString().trim();
@@ -88,10 +87,7 @@ public class ListAllStories extends BaseCommand {
         if (param.equalsIgnoreCase("title")){
             return true;
         }
-        if(param.equalsIgnoreCase("priority")){
-            return true;
-        }
-        if(param.equalsIgnoreCase("size")){
+        if(param.equalsIgnoreCase("rating")){
             return true;
         }
         return false;

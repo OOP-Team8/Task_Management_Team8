@@ -10,14 +10,14 @@ public class  StoryImpl extends TaskImpl implements Story {
     private Priority priority;
     private StoryStatus status;
     private Size size;
-    //private Person person;
+    private Person person;
 
     public StoryImpl(int id, String title, String description, Priority priority, StoryStatus status, Size size, Person person) {
         super(id, title, description, person);
         setPriority(priority);
         setStatus(status);
         setSize(size);
-        //this.person = person;
+        this.person = person;
     }
 
     @Override
@@ -47,14 +47,8 @@ public class  StoryImpl extends TaskImpl implements Story {
         this.size = size;
     }
 
-//    @Override
-//    public Person getPerson() {
-//        return this.person;
-//    }
-
-    //TODO
     @Override
     public String getAsString() {
-        return null;
+       return String.format("%s\n%s\n%s\n%s",super.getAsString(),getPriority(),getStatus(),getSize());
     }
 }

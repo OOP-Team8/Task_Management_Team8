@@ -34,10 +34,8 @@ public class FeedbackImpl extends TaskImpl implements Feedback {
         this.rating = rating;
     }
 
-
-    //TODO
     @Override
     public String getAsString() {
-        return null;
+        return String.format("%s\n%s\n%s\n%s",super.getAsString(),getStatus(),getRating());
     }
 }
