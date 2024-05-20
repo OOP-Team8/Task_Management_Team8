@@ -72,7 +72,7 @@ public class CommandFactoryImpl implements CommandFactory {
             case LISTALLBUGS:
                 return new ListAllBugs(taskManagementRepository);
             case LISTALLFEEDBACK:
-                return new ListAllFeedback(taskManagementRepository);
+                return new ListAllFeedbacks(taskManagementRepository);
             case LISTALLSTORIES:
                 return new ListAllStories(taskManagementRepository);
             case LISTALLTASKS:

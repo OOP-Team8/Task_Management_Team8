@@ -2,38 +2,35 @@ package com.task_management_project.commands.listing;
 
 import com.task_management_project.commands.BaseCommand;
 import com.task_management_project.core.contracts.TaskManagementRepository;
-import com.task_management_project.models.BugImpl;
-import com.task_management_project.models.contracts.Board;
 import com.task_management_project.models.contracts.Bug;
+import com.task_management_project.models.contracts.Feedback;
 import com.task_management_project.models.enums.BugStatus;
+import com.task_management_project.models.enums.FeedbackStatus;
 import com.task_management_project.utils.ListingHelpers;
 import com.task_management_project.utils.ParsingHelpers;
-import com.task_management_project.utils.Validation;
 
-import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
-public class ListAllBugs extends BaseCommand {
+public class ListAllFeedbacks extends BaseCommand {
 
-    private BugStatus status = null;
+    private FeedbackStatus status = null;
     private String personName = null;
     private String sortBy = null;
 
-    public ListAllBugs(TaskManagementRepository taskManagementRepository) {
+    public ListAllFeedbacks(TaskManagementRepository taskManagementRepository) {
         super(taskManagementRepository);
     }
 
     @Override
     protected String executeCommand(List<String> parameters) {
+        List<Feedback> feedbacks = getTaskManagementRepository().getFeedbacks();
 
-        List<Bug> bugs = getTaskManagementRepository().getBugs();
-
+        //TODO
         for (String param : parameters) {
             if (checkStatus(param)) {
-                status = ParsingHelpers.tryParseEnum(param,BugStatus.class);
+                status = ParsingHelpers.tryParseEnum(param,FeedbackStatus.class);
             } else if(checkSortBy(param)) {
                 sortBy = param;
             } else {
@@ -41,10 +38,10 @@ public class ListAllBugs extends BaseCommand {
             }
         }
 
-        return findBug(status,personName,sortBy,bugs);
+        return findFeedback(status,personName,sortBy,feedbacks);
     }
 
-    public String findBug(BugStatus status, String personName, String sortBy, List<Bug> list){
+    public String findFeedback(FeedbackStatus status, String personName, String sortBy, List<Feedback> list){
 
         if (list.isEmpty()) {
             return "No bugs found with the specified criteria.";
@@ -52,20 +49,19 @@ public class ListAllBugs extends BaseCommand {
 
         if(status != null){
             list = list.stream()
-                    .filter(bug -> bug.getStatus() == status)
+                    .filter(feedback -> feedback.getStatus() == status)
                     .collect(Collectors.toList());
         }
         if (personName != null){
             list = list.stream()
-                    .filter(bug -> bug.getPerson().getName().equals(personName))
+                    .filter(feedback -> feedback.getPerson().getName().equals(personName))
                     .collect(Collectors.toList());
         }
 
         if (sortBy != null) {
             switch (sortBy.toLowerCase()) {
-                case "title" -> list.sort(Comparator.comparing(Bug::getTitle));
-                case "priority" -> list.sort(Comparator.comparing(Bug::getPriority));
-                case "severity" -> list.sort(Comparator.comparing(Bug::getSeverity));
+                case "title" -> list.sort(Comparator.comparing(Feedback::getTitle));
+                case "rating" -> list.sort(Comparator.comparing(Feedback::getRating));
                 default -> throw new IllegalArgumentException("Invalid sort parameter.");
             }
         }
@@ -88,10 +84,7 @@ public class ListAllBugs extends BaseCommand {
         if (param.equalsIgnoreCase("title")){
             return true;
         }
-        if(param.equalsIgnoreCase("severity")){
-            return true;
-        }
-        if(param.equalsIgnoreCase("priority")){
+        if(param.equalsIgnoreCase("rating")){
             return true;
         }
         return false;

@@ -5,6 +5,7 @@ import com.task_management_project.models.contracts.Person;
 import com.task_management_project.models.enums.BugSeverity;
 import com.task_management_project.models.enums.BugStatus;
 import com.task_management_project.models.enums.Priority;
+import com.task_management_project.models.enums.TaskType;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,6 +22,7 @@ public class BugImpl extends TaskImpl implements Bug {
         setPriority(priority);
         setBugSeverity(bugSeverity);
         setBugStatus(bugStatus);
+        this.type = TaskType.BUG;
         steps = new ArrayList<>();
         eventList.add(new EventLogImpl(String.format("New bug was initialized with name - %s",getTitle())));
     }
@@ -45,17 +47,15 @@ public class BugImpl extends TaskImpl implements Bug {
     private void setPriority(Priority priority) {
         this.priority = priority;
     }
-
     private void setBugStatus(BugStatus bugStatus) {
         this.bugStatus = bugStatus;
     }
-
     private void setBugSeverity(BugSeverity bugSeverity) {
         this.bugSeverity = bugSeverity;
     }
-    //TODO
+
     @Override
     public String getAsString() {
-        return null;
+        return String.format("%s\nPriority: %s\nStatus: %s\nSeverity: %s",super.getAsString(),getPriority(),getStatus(),getSeverity());
     }
 }

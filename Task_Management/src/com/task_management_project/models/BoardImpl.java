@@ -20,19 +20,14 @@ public class BoardImpl implements Board{
         eventLogList = new ArrayList<>();
     }
 
+    @Override
     public String getName() {
         return this.name;
     }
-    private void setName(String name){
-        Validation.validateStringLength(name, DataValidation.MIN_NAME_LENGTH, DataValidation.MAX_BOARD_LENGTH,DataValidation.BOARD_NAME_ERROR);
-        this.name = name;
-    }
-
     @Override
     public List<Task> getTasks() {
         return new ArrayList<>(boardTasks);
     }
-
     @Override
     public List<EventLog> getLogs() {
         return new ArrayList<>(eventLogList);
@@ -41,6 +36,11 @@ public class BoardImpl implements Board{
     @Override
     public  void addTask(Task task){
         boardTasks.add(task);
+    }
+
+    private void setName(String name){
+        Validation.validateStringLength(name, DataValidation.MIN_NAME_LENGTH, DataValidation.MAX_BOARD_LENGTH,DataValidation.BOARD_NAME_ERROR);
+        this.name = name;
     }
 
     @Override
