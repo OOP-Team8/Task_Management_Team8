@@ -26,11 +26,6 @@ public class PersonImpl implements Person {
     public String getName() {
         return this.name;
     }
-
-    private void setName(String name) {
-        Validation.validateStringLength(name, 5, 15, DataValidation.NAME_ERROR);
-        this.name = name;
-    }
     @Override
     public List<Task> getTasks() {
         return new ArrayList<>(tasks);
@@ -39,9 +34,14 @@ public class PersonImpl implements Person {
     public List<EventLog> getLogs() {
         return new ArrayList<>(history);
     }
+
     @Override
     public void addTask(Task task) {
         tasks.add(task);
+    }
+    @Override
+    public void removeTask(Task task) {
+        tasks.remove(task);
     }
 
     @Override
@@ -49,9 +49,9 @@ public class PersonImpl implements Person {
         history.add(log);
     }
 
-    @Override
-    public void removeTask(Task task) {
-        tasks.remove(task);
+    private void setName(String name) {
+        Validation.validateStringLength(name, 5, 15, DataValidation.NAME_ERROR);
+        this.name = name;
     }
 
     @Override

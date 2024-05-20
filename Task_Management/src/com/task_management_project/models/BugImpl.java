@@ -5,6 +5,7 @@ import com.task_management_project.models.contracts.Person;
 import com.task_management_project.models.enums.BugSeverity;
 import com.task_management_project.models.enums.BugStatus;
 import com.task_management_project.models.enums.Priority;
+import com.task_management_project.models.enums.TaskType;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,7 +18,7 @@ public class BugImpl extends TaskImpl implements Bug {
     private List<String> steps;
 
     public BugImpl(int id, String title, String description, Priority priority, BugStatus bugStatus, BugSeverity bugSeverity,Person person) {
-        super(id, title, description,person);
+        super(id, title, description,person, TaskType.BUG);
         setPriority(priority);
         setBugSeverity(bugSeverity);
         setBugStatus(bugStatus);
@@ -45,11 +46,9 @@ public class BugImpl extends TaskImpl implements Bug {
     private void setPriority(Priority priority) {
         this.priority = priority;
     }
-
     private void setBugStatus(BugStatus bugStatus) {
         this.bugStatus = bugStatus;
     }
-
     private void setBugSeverity(BugSeverity bugSeverity) {
         this.bugSeverity = bugSeverity;
     }

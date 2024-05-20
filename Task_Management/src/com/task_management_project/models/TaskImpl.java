@@ -4,6 +4,7 @@ import com.task_management_project.models.contracts.Comment;
 import com.task_management_project.models.contracts.EventLog;
 import com.task_management_project.models.contracts.Person;
 import com.task_management_project.models.contracts.Task;
+import com.task_management_project.models.enums.TaskType;
 import com.task_management_project.utils.contracts.DataValidation;
 import com.task_management_project.utils.Validation;
 
@@ -17,8 +18,9 @@ public abstract class TaskImpl implements Task {
     protected List<Comment> comments;
     protected List<EventLog> eventList;
     private final Person person;
+    private TaskType type;
 
-    public TaskImpl(int id, String title, String description, Person person) {
+    public TaskImpl(int id, String title, String description, Person person, TaskType type) {
         this.id = id;
         setTitle(title);
         setDescription(description);
@@ -31,14 +33,27 @@ public abstract class TaskImpl implements Task {
     public Person getPerson() {
         return this.person;
     }
-
+    @Override
     public int getId() {
         return id;
     }
-
+    @Override
     public String getTitle() {
         return title;
     }
+    @Override
+    public String getDescription() {
+        return description;
+    }
+    @Override
+    public List<Comment> getCommentList() {
+        return new ArrayList(comments);
+    }
+    @Override
+    public List<EventLog> getChangesList() {
+        return new ArrayList(eventList);
+    }
+
 
     private void setTitle(String title) {
         Validation.validateStringLength(title, 10, 100, DataValidation.TITLE_ERROR);
@@ -46,10 +61,6 @@ public abstract class TaskImpl implements Task {
             this.eventList.add(new EventLogImpl(String.format("The title was changed - %s", title)));
         }
         this.title = title;
-    }
-
-    public String getDescription() {
-        return description;
     }
 
     private void setDescription(String description) {
@@ -60,13 +71,7 @@ public abstract class TaskImpl implements Task {
         this.description = description;
     }
 
-    public List<Comment> getCommentList() {
-        return new ArrayList(comments);
-    }
 
-    public List<EventLog> getChangesList() {
-        return new ArrayList(eventList);
-    }
 
     @Override
     public String getAsString() {

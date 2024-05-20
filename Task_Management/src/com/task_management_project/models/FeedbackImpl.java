@@ -2,6 +2,7 @@ package com.task_management_project.models;
 
 import com.task_management_project.models.contracts.*;
 import com.task_management_project.models.enums.FeedbackStatus;
+import com.task_management_project.models.enums.TaskType;
 import com.task_management_project.utils.Validation;
 
 import java.util.List;
@@ -11,7 +12,7 @@ public class FeedbackImpl extends TaskImpl implements Feedback {
     private int rating;
 
     public FeedbackImpl(int id, String title, String description, FeedbackStatus status, int rating, Person person) {
-        super(id, title, description, person);
+        super(id, title, description, person, TaskType.FEEDBACK);
         this.status = status;
         setRating(rating);
         this.eventList.add(new EventLogImpl("It was created a new feedback!"));
@@ -20,7 +21,6 @@ public class FeedbackImpl extends TaskImpl implements Feedback {
     public int getRating() {
         return this.rating;
     }
-
     @Override
     public FeedbackStatus getStatus() {
         return this.status;
