@@ -7,8 +7,6 @@ import com.task_management_project.models.enums.*;
 import com.task_management_project.utils.Validation;
 
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 
 public class TaskManagementRepositoryImpl implements TaskManagementRepository {
@@ -154,6 +152,11 @@ public class TaskManagementRepositoryImpl implements TaskManagementRepository {
     }
 
     @Override
+    public Feedback createFeedback(String title, String description, FeedbackStatus status, int rating) {
+        return null;
+    }
+
+    @Override
     public Feedback createFeedback(String title, String description, FeedbackStatus status, int rating, Person person) {
         Feedback feedback = new FeedbackImpl(++nextId, title, description, status, rating, person);
         feedbacks.add(feedback);
@@ -213,6 +216,56 @@ public class TaskManagementRepositoryImpl implements TaskManagementRepository {
         Story storyItem = new StoryImpl(story.getId(),story.getTitle(),story.getDescription(),priority,story.getStatus(),story.getSize(),story.getPerson());
         stories.add(storyItem);
         tasks.add(storyItem);
+    }
+
+    @Override
+    public void changeStorySize(Story story, Size size) {
+        TaskManagementRepositoryImpl.findById(story.getId(), stories);
+        stories.remove(story);
+        tasks.remove(story);
+        Story storyItem = new StoryImpl(story.getId(),story.getTitle(),story.getDescription(),story.getPriority(),story.getStatus(),story.getSize(),story.getPerson());
+        stories.add(storyItem);
+        tasks.add(storyItem);
+    }
+
+    @Override
+    public void changeBugStatus(Bug bug, BugStatus newStatus) {
+        TaskManagementRepositoryImpl.findById(bug.getId(), bugs);
+        bugs.remove(bug);
+        tasks.remove(bug);
+        Bug bugItem = new BugImpl(bug.getId(),bug.getTitle(),bug.getDescription(),bug.getPriority(),bug.getStatus(),bug.getSeverity(),bug.getPerson());
+        bugs.add(bugItem);
+        tasks.add(bugItem);
+    }
+
+    @Override
+    public void changeStoryStatus(Story story, StoryStatus status) {
+        TaskManagementRepositoryImpl.findById(story.getId(), stories);
+        stories.remove(story);
+        tasks.remove(story);
+        Story storyItem = new StoryImpl(story.getId(),story.getTitle(),story.getDescription(),story.getPriority(),story.getStatus(),story.getSize(),story.getPerson());
+        stories.add(storyItem);
+        tasks.add(storyItem);
+    }
+
+    @Override
+    public void changeBugSeverity(Bug bug, BugSeverity severity) {
+        TaskManagementRepositoryImpl.findById(bug.getId(), bugs);
+        bugs.remove(bug);
+        tasks.remove(bug);
+        Bug bugItem = new BugImpl(bug.getId(),bug.getTitle(),bug.getDescription(),bug.getPriority(),bug.getStatus(),bug.getSeverity(),bug.getPerson());
+        bugs.add(bugItem);
+        tasks.add(bugItem);
+    }
+
+    @Override
+    public void changeFeedbackStatus(Feedback feedback, FeedbackStatus status) {
+        TaskManagementRepositoryImpl.findById(feedback.getId(), feedbacks);
+        feedbacks.remove(feedback);
+        tasks.remove(feedback);
+        Feedback feedbackItem = new FeedbackImpl(feedback.getId(),feedback.getTitle(),feedback.getDescription(),feedback.getStatus(),feedback.getRating(),feedback.getPerson());
+        feedbacks.add(feedbackItem);
+        tasks.add(feedbackItem);
     }
 
     @Override
