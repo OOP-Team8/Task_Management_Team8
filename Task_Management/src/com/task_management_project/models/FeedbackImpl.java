@@ -39,4 +39,9 @@ public class FeedbackImpl extends TaskImpl implements Feedback {
     public String getAsString() {
         return String.format("%s\nStatus: %s\nRating: %s",super.getAsString(),getStatus(),getRating());
     }
+
+    @Override
+    public boolean getAssignable() {
+        return false;
+    }
 }

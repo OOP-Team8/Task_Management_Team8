@@ -5,7 +5,7 @@ import com.task_management_project.models.enums.TaskType;
 
 import java.util.List;
 
-public interface Task extends Printable,Identifiable{
+public interface Task extends Printable,Identifiable,Assignable{
 
     String getTitle();
     String getDescription();

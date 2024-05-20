@@ -16,7 +16,6 @@ import java.util.stream.Collectors;
 public class ListAllFeedbacks extends BaseCommand {
 
     private FeedbackStatus status = null;
-    private String personName = null;
     private String sortBy = null;
 
     public ListAllFeedbacks(TaskManagementRepository taskManagementRepository) {
@@ -27,21 +26,18 @@ public class ListAllFeedbacks extends BaseCommand {
     protected String executeCommand(List<String> parameters) {
         List<Feedback> feedbacks = getTaskManagementRepository().getFeedbacks();
 
-        //TODO
         for (String param : parameters) {
             if (checkStatus(param)) {
                 status = ParsingHelpers.tryParseEnum(param,FeedbackStatus.class);
             } else if(checkSortBy(param)) {
                 sortBy = param;
-            } else {
-                personName = param;
             }
         }
 
-        return findFeedback(status,personName,sortBy,feedbacks);
+        return findFeedback(status,sortBy,feedbacks);
     }
 
-    public String findFeedback(FeedbackStatus status, String personName, String sortBy, List<Feedback> list){
+    public String findFeedback(FeedbackStatus status, String sortBy, List<Feedback> list){
 
         if (list.isEmpty()) {
             return "No bugs found with the specified criteria.";
@@ -50,11 +46,6 @@ public class ListAllFeedbacks extends BaseCommand {
         if(status != null){
             list = list.stream()
                     .filter(feedback -> feedback.getStatus() == status)
-                    .collect(Collectors.toList());
-        }
-        if (personName != null){
-            list = list.stream()
-                    .filter(feedback -> feedback.getPerson().getName().equals(personName))
                     .collect(Collectors.toList());
         }
 

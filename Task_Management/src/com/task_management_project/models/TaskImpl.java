@@ -76,7 +76,6 @@ public abstract class TaskImpl implements Task {
     }
 
 
-
     @Override
     public String getAsString() {
         return String.format("ID: %d\nTitle: %s\nDescription: %s\nAssignee: %s",getId(),getTitle(),getDescription(),getPerson().getAsString());
