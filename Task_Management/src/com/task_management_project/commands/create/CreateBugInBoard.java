@@ -45,7 +45,7 @@ public class CreateBugInBoard extends BaseCommand {
         Board board = getTaskManagementRepository().findBoardByName(boardName);
 
         getTaskManagementRepository().addTaskToBoard(bug,board);
-        getTaskManagementRepository().addTaskToMember(bug, person);
+        //getTaskManagementRepository().addTaskToMember(bug, person);
 
         return String.format(BUG_ADDED_SUCCESSFULLY,title,boardName);
     }

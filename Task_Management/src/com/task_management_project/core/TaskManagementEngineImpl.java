@@ -87,17 +87,14 @@ public class TaskManagementEngineImpl implements TaskManagementEngine {
     }
 
     public List<String> extractCommentParameters(String fullCommand) {
-        //int indexOfFirstSeparator = fullCommand.indexOf(MAIN_SPLIT_SYMBOL);
         int indexOfOpenComment = fullCommand.indexOf(COMMENT_OPEN_SYMBOL);
         String[] commandParts = fullCommand.split(" ");
-        //int indexOfCloseComment = fullCommand.indexOf(COMMENT_CLOSE_SYMBOL);
         List<String> parameters = new ArrayList<>();
         for (int i = 1; i < fullCommand.length() - 1 ; i++) {
             if (commandParts[i].contains(COMMENT_OPEN_SYMBOL)){
-                //fullCommand = fullCommand.replaceAll("\\{.+(?=}})", "");
                 StringBuilder builder = new StringBuilder();
                 for (int j = 5; j < commandParts.length; j++) {
-                    commandParts[j] = commandParts[j].replaceAll("[{}]",""); // change!
+                    commandParts[j] = commandParts[j].replaceAll("[{}]","");
                     builder.append(commandParts[j]).append((Arrays.asList(commandParts).indexOf(commandParts[j]) < commandParts.length - 1) ? " " : "");
                 }
                 parameters.add(builder.toString());

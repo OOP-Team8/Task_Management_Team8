@@ -7,7 +7,6 @@ import com.task_management_project.models.contracts.Task;
 import com.task_management_project.utils.contracts.DataValidation;
 import com.task_management_project.utils.Validation;
 
-import java.io.ObjectInputFilter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,15 +14,20 @@ public abstract class TaskImpl implements Task {
     private int id;
     private String title;
     private String description;
-    protected List<Comment> comments = new ArrayList();
-    protected List<EventLog> eventList = new ArrayList();
-    Person person;
+    protected List<Comment> comments;
+    protected List<EventLog> eventList;
+    private final Person person;
+    private Person assignee;
+
 
     public TaskImpl(int id, String title, String description, Person person) {
         this.id = id;
         setTitle(title);
         setDescription(description);
+        comments = new ArrayList();
+        eventList = new ArrayList();
         this.person = person;
+        this.assignee = assignee;
     }
 
     @Override

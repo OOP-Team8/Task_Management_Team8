@@ -53,4 +53,9 @@ public class TeamImpl implements Team {
             this.boards.add(board);
         }
     }
+
+    @Override
+    public String getAsString() {
+        return String.format("%s %n", getName());
+    }
 }

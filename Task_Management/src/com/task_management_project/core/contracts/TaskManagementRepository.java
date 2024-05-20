@@ -45,6 +45,7 @@ public interface TaskManagementRepository {
 
     void addTaskToMember(Task task, Person member);
 
-    void changeBugPriority(Task task, Priority priority);
-    void changeStoryPriority(Task task, Priority priority);
+    void changeBugPriority(Bug bug, Priority priority);
+    void changeStoryPriority(Story story, Priority priority);
+    void removeTaskFromPerson(Task task, Person assignee);
 }

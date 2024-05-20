@@ -39,10 +39,19 @@ public class PersonImpl implements Person {
     public List<EventLog> getLogs() {
         return new ArrayList<>(history);
     }
-
     @Override
     public void addTask(Task task) {
         tasks.add(task);
+    }
+
+    @Override
+    public void addEvent(EventLog log) {
+        history.add(log);
+    }
+
+    @Override
+    public void removeTask(Task task) {
+        tasks.remove(task);
     }
 
     @Override

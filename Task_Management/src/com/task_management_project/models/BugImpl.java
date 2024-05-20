@@ -22,10 +22,8 @@ public class BugImpl extends TaskImpl implements Bug {
         setBugSeverity(bugSeverity);
         setBugStatus(bugStatus);
         steps = new ArrayList<>();
-        this.person = person;
         eventList.add(new EventLogImpl(String.format("New bug was initialized with name - %s",getTitle())));
     }
-
     @Override
     public Priority getPriority() {
         return priority;
@@ -56,8 +54,10 @@ public class BugImpl extends TaskImpl implements Bug {
         this.bugSeverity = bugSeverity;
     }
 
+
+    //TODO
     @Override
     public String getAsString() {
-        return String.format("%s\n%s\n%s\n%s",super.getAsString(),getPriority(),getStatus(),getSeverity());
+        return null;
     }
 }

@@ -10,16 +10,13 @@ public class  StoryImpl extends TaskImpl implements Story {
     private Priority priority;
     private StoryStatus status;
     private Size size;
-    private Person person;
 
     public StoryImpl(int id, String title, String description, Priority priority, StoryStatus status, Size size, Person person) {
         super(id, title, description, person);
         setPriority(priority);
         setStatus(status);
         setSize(size);
-        this.person = person;
     }
-
     @Override
     public Priority getPriority() {
         return this.priority;
@@ -47,6 +44,9 @@ public class  StoryImpl extends TaskImpl implements Story {
         this.size = size;
     }
 
+
+
+    //TODO
     @Override
     public String getAsString() {
        return String.format("%s\n%s\n%s\n%s",super.getAsString(),getPriority(),getStatus(),getSize());
