@@ -5,14 +5,6 @@ import com.task_management_project.models.enums.BugStatus;
 public class ParsingHelpers {
     public static final String NO_SUCH_ENUM = "There is no %s in %ss.";
 
-    public static double tryParseDouble(String valueToParse, String errorMessage) {
-        try {
-            return Double.parseDouble(valueToParse);
-        } catch (NumberFormatException e) {
-            throw new IllegalArgumentException(errorMessage);
-        }
-    }
-
     public static int tryParseInt(String valueToParse, String errorMessage) {
         try {
             return Integer.parseInt(valueToParse);
