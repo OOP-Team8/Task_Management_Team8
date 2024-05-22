@@ -12,7 +12,7 @@ public interface Task extends Printable,Identifiable,Assignable{
     Person getPerson();
 
     TaskType getType();
-
+    void addComment(Comment comment);
     List<Comment> getCommentList();
     List<EventLog> getChangesList();
 

@@ -24,8 +24,8 @@ public abstract class TaskImpl implements Task {
         this.id = id;
         setTitle(title);
         setDescription(description);
-        comments = new ArrayList();
-        eventList = new ArrayList();
+        comments = new ArrayList<>();
+        eventList = new ArrayList<>();
         this.person = person;
     }
 
@@ -51,13 +51,12 @@ public abstract class TaskImpl implements Task {
     }
     @Override
     public List<Comment> getCommentList() {
-        return new ArrayList(comments);
+        return new ArrayList<>(comments);
     }
     @Override
     public List<EventLog> getChangesList() {
-        return new ArrayList(eventList);
+        return new ArrayList<>(eventList);
     }
-
 
     private void setTitle(String title) {
         Validation.validateStringLength(title, 10, 100, DataValidation.TITLE_ERROR);
@@ -74,7 +73,10 @@ public abstract class TaskImpl implements Task {
         }
         this.description = description;
     }
-
+    @Override
+    public void addComment(Comment comment){
+        this.comments.add(comment);
+    }
 
     @Override
     public String getAsString() {

@@ -25,8 +25,8 @@ public class AddCommentToTask extends BaseCommand {
         Person person = getTaskManagementRepository().findPersonByName(parameters.get(3));
         Comment comment = getTaskManagementRepository().createComment(person, parameters.get(4));
 
-        getTaskManagementRepository().findTaskById(task.getId()).getCommentList().add(comment);
-        getTaskManagementRepository().findTaskById(task.getId()).getChangesList().add(new EventLogImpl(String.format(comment.toString())));
+        task.addComment(comment);
+        //getTaskManagementRepository().findTaskById(task.getId()).getChangesList().add(new EventLogImpl(String.format(comment.toString())));
 
         return String.format(COMMENT_ADDED_SUCCESSFULLY,person.getName(), task.getTitle(), comment.getContent());
     }

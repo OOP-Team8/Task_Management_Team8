@@ -19,7 +19,6 @@ public class PersonImpl implements Person {
         setName(name);
         history = new ArrayList<>();
         tasks = new ArrayList<>();
-
     }
 
     @Override

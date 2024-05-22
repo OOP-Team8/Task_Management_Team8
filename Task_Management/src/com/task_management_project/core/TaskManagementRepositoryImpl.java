@@ -204,6 +204,7 @@ public class TaskManagementRepositoryImpl implements TaskManagementRepository {
         bugs.remove(bug);
         tasks.remove(bug);
         Bug bugItem = new BugImpl(bug.getId(),bug.getTitle(),bug.getDescription(),priority,bug.getStatus(),bug.getSeverity(),bug.getPerson());
+        bugItem.getChangesList().add(new EventLogImpl(String.format("The priority was changed from %s to %s", bug.getPriority(), bugItem.getPriority())));
         bugs.add(bugItem);
         tasks.add(bugItem);
     }
