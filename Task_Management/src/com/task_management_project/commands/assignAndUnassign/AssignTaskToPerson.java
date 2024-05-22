@@ -27,6 +27,6 @@ public class AssignTaskToPerson extends BaseCommand {
         getTaskManagementRepository().addTaskToMember(task,person2);
 
         return (!person1.equals(person2) ? String.format("%s gives a new task with name - %s to %s",person1.getName(),task.getTitle(),person2.getName())
-                : String.format("%s take a new task with name - %s",person1.getName() ,task.getTitle()));
+                : String.format("%s takes a new task with name - %s",person1.getName() ,task.getTitle()));
     }
 }

@@ -71,7 +71,8 @@ public class TaskManagementRepositoryImpl implements TaskManagementRepository {
 
     @Override
     public Comment createComment(Person author, String content) {
-        return new CommentImpl(author, content);
+        Comment comment = new CommentImpl(author, content);
+        return comment;
     }
 
     @Override
@@ -82,7 +83,6 @@ public class TaskManagementRepositoryImpl implements TaskManagementRepository {
         this.people.add(personToAdd);
     }
 
-    //ADDS TEAM TO LIST TEAMS
     @Override
     public void addTeam(Team team) {
         if (teams.contains(team)) {
@@ -90,56 +90,46 @@ public class TaskManagementRepositoryImpl implements TaskManagementRepository {
         }
         this.teams.add(team);
     }
-
     @Override
     public Person findPersonByName(String name) {
         return people.stream().filter(p -> p.getName().equalsIgnoreCase(name)).findFirst().orElseThrow(() -> new IllegalArgumentException("This person doesn't exist!"));
     }
-
     @Override
     public Person createPerson(String name) {
         Validation.validateDubs(people, name);
         Person person = new PersonImpl(name);
         return person;
     }
-
     @Override
     public Task findTaskById(int id) {
         return tasks.stream().filter(t -> t.getId() == id).findFirst().orElseThrow(() -> new IllegalArgumentException("This task doesn't exist!"));
     }
-
     @Override
     public Bug findBugByTitle(String title) {
         return bugs.stream().filter(t -> t.getTitle() == title).findFirst().orElseThrow(() -> new IllegalArgumentException("This title doesn't exist!"));
     }
-
     @Override
     public Story findStoryByTitle(String title) {
         return stories.stream().filter(t -> t.getTitle() == title).findFirst().orElseThrow(() -> new IllegalArgumentException("This title doesn't exist!"));
     }
-
     @Override
     public Feedback findFeedbackByTitle(String title) {
         return feedbacks.stream().filter(t -> t.getTitle() == title).findFirst().orElseThrow(() -> new IllegalArgumentException("This title doesn't exist!"));
     }
-
     @Override
     public Team createTeam(String name) {
         Validation.validateDubs(teams, name);
         Team team = new TeamImpl(name);
         return team;
     }
-
     @Override
     public Team findTeamByName(String name) {
         return teams.stream().filter(t -> t.getName().equals(name)).findFirst().orElseThrow(() -> new IllegalArgumentException("This team doesn't exist!"));
     }
-
     @Override
     public Board findBoardByName(String name) {
         return boards.stream().filter(b -> b.getName().equals(name)).findFirst().orElseThrow(() -> new IllegalArgumentException("This board doesn't exist!"));
     }
-
     public static  <T extends Task> T findById(int id, List<T> list){
         return list.stream().filter(t -> t.getId() == id).findFirst().orElseThrow(() -> new IllegalArgumentException("This task doesn't exist!"));
     }
@@ -150,12 +140,10 @@ public class TaskManagementRepositoryImpl implements TaskManagementRepository {
         tasks.add(bug);
         return bug;
     }
-
     @Override
     public Feedback createFeedback(String title, String description, FeedbackStatus status, int rating) {
         return null;
     }
-
     @Override
     public Feedback createFeedback(String title, String description, FeedbackStatus status, int rating, Person person) {
         Feedback feedback = new FeedbackImpl(++nextId, title, description, status, rating, person);
@@ -163,7 +151,6 @@ public class TaskManagementRepositoryImpl implements TaskManagementRepository {
         tasks.add(feedback);
         return feedback;
     }
-
     @Override
     public Story createStory(String title, String description, Priority priority, StoryStatus storyStatus, Size size, Person person) {
         Story story = new StoryImpl(++nextId, title, description, priority, storyStatus, size, person);
@@ -171,20 +158,17 @@ public class TaskManagementRepositoryImpl implements TaskManagementRepository {
         tasks.add(story);
         return story;
     }
-
     @Override
     public Board createBoard(String name) {
         Board board = new BoardImpl(name);
         boards.add(board);
         return board;
     }
-
     @Override
     public void addTaskToBoard(Task task, Board board) {
         findBoardByName(board.getName()).addTask(task);
 
     }
-
     @Override
     public void addTaskToMember(Task task, Person assignee) {
         if (!people.contains(assignee)){
@@ -197,7 +181,6 @@ public class TaskManagementRepositoryImpl implements TaskManagementRepository {
         task.getPerson().addEvent(new EventLogImpl(String.format("%s take a new task - %s",assignee.getName(),task.getTitle())));
         assignee.addTask(task);
     }
-
     @Override
     public void changeBugPriority(Bug bug, Priority priority) {
         TaskManagementRepositoryImpl.findById(bug.getId(), bugs);
@@ -208,7 +191,6 @@ public class TaskManagementRepositoryImpl implements TaskManagementRepository {
         bugs.add(bugItem);
         tasks.add(bugItem);
     }
-
     @Override
     public void changeStoryPriority(Story story, Priority priority) {
         TaskManagementRepositoryImpl.findById(story.getId(), stories);
@@ -218,7 +200,6 @@ public class TaskManagementRepositoryImpl implements TaskManagementRepository {
         stories.add(storyItem);
         tasks.add(storyItem);
     }
-
     @Override
     public void changeStorySize(Story story, Size size) {
         TaskManagementRepositoryImpl.findById(story.getId(), stories);
@@ -228,7 +209,6 @@ public class TaskManagementRepositoryImpl implements TaskManagementRepository {
         stories.add(storyItem);
         tasks.add(storyItem);
     }
-
     @Override
     public void changeBugStatus(Bug bug, BugStatus newStatus) {
         TaskManagementRepositoryImpl.findById(bug.getId(), bugs);
@@ -238,7 +218,6 @@ public class TaskManagementRepositoryImpl implements TaskManagementRepository {
         bugs.add(bugItem);
         tasks.add(bugItem);
     }
-
     @Override
     public void changeStoryStatus(Story story, StoryStatus status) {
         TaskManagementRepositoryImpl.findById(story.getId(), stories);
@@ -248,7 +227,6 @@ public class TaskManagementRepositoryImpl implements TaskManagementRepository {
         stories.add(storyItem);
         tasks.add(storyItem);
     }
-
     @Override
     public void changeBugSeverity(Bug bug, BugSeverity severity) {
         TaskManagementRepositoryImpl.findById(bug.getId(), bugs);
@@ -258,7 +236,6 @@ public class TaskManagementRepositoryImpl implements TaskManagementRepository {
         bugs.add(bugItem);
         tasks.add(bugItem);
     }
-
     @Override
     public void changeFeedbackStatus(Feedback feedback, FeedbackStatus status) {
         TaskManagementRepositoryImpl.findById(feedback.getId(), feedbacks);
@@ -268,7 +245,6 @@ public class TaskManagementRepositoryImpl implements TaskManagementRepository {
         feedbacks.add(feedbackItem);
         tasks.add(feedbackItem);
     }
-
     @Override
     public void removeTaskFromPerson(Task task, Person assignee) {
         TaskManagementRepositoryImpl.findById(task.getId(),assignee.getTasks());
